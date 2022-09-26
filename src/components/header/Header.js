@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 
 import './Header.css';
 
 import headerLogo from '../../images/header__logo.svg';
-import { Link, withRouter } from 'react-router-dom';
 
 function Header() {
   return (

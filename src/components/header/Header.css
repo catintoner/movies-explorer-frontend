@@ -36,7 +36,7 @@
   transition: .2s;
 }
 
-.nav__signin:not(.header__link_type_signin):hover {
+.nav__signin:hover {
   opacity: .8;
 }
 
@@ -44,7 +44,7 @@
   text-decoration: none;
   color: #000;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 16px;
 }
 

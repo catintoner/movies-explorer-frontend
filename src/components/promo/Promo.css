@@ -1,0 +1,37 @@
+.promo__container {
+  max-width: calc(100% - 70px*2);
+  margin: 0 auto 84px;
+  padding: 75px 0 0;
+  display: grid;
+  grid-template-areas:
+    "promo__title promo__logo"
+    "promo__subtitle promo__logo";
+    grid-template-rows: min-content 1fr;
+}
+
+.promo__title {
+  height: min-content;
+  grid-area: promo__title;
+  margin: 0 0 36px;
+  max-width: 640px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  font-style: normal;
+
+}
+
+.promo__subtitle {
+  grid-area: promo__subtitle;
+  margin: 0;
+  max-width: 310px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  opacity: .5;
+}
+
+.promo__logo {
+  grid-area: promo__logo;
+  justify-self: flex-end;
+}
