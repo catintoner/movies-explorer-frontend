@@ -1,0 +1,80 @@
+.aboutProject__container {
+  max-width: calc(100% - 70px*2);
+  margin: 0 auto;
+}
+
+.aboutProject__title {
+  margin: 0 0 70px;
+  padding: 110px 0 23px;
+  border-bottom: 1px solid #000;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.aboutProject__info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.aboutProject__description {
+  margin: 0 0 110px;
+}
+
+.aboutProject__description:last-child {
+  padding: 0 0 0 20px;
+}
+
+.description__title {
+  margin: 0 0 26px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.description__info {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.aboutProject__deadlines {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 36px;
+}
+
+.deadlines__info {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.deadlines__term {
+  margin: 0 0 14px;
+  padding: 10px 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.deadlines__term_type_backend {
+  background-color: #000;
+  color: #fff;
+}
+
+.deadlines__term_type_frontend {
+  background-color: #F2F2F2;
+}
+
+.deadlines__quote {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #A0A0A0;
+}

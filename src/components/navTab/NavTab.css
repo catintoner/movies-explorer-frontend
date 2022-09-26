@@ -1,0 +1,21 @@
+.navTab__container {
+  max-width: calc(100% - 70px*2);
+  margin: 0 auto;
+  padding: 0 0 75px;
+}
+
+.navTab__button {
+  padding: 9px 19px;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, .6);
+  border-radius: 3px;
+  transition: .2s;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.navTab__button:hover {
+  opacity: .8;
+}

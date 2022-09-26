@@ -1,18 +1,28 @@
 import React from 'react';
+import AboutProject from '../aboutProject/AboutProject';
 import Header from '../header/Header';
+import NavTab from '../navTab/NavTab';
 import Promo from '../promo/Promo';
 
 import './Main.css';
 
 function Main() {
   return (
-    <header className='main__header'>
-      <Header
-      />
-      <Promo
-      />
+    <>
+      <header className='header'>
+        <Header
+        />
+        <Promo
+        />
+        <NavTab
+        />
+      </header>
 
-    </header>
+      <main className='content'>
+        <AboutProject
+        />
+      </main>
+    </>
   );
 }
 
