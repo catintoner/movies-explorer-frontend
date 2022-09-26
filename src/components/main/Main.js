@@ -10,6 +10,7 @@ function Main() {
     <header className='main__header'>
       <Header
       />
+
     </header>
   );
 }
