@@ -3,6 +3,7 @@ import AboutProject from '../aboutProject/AboutProject';
 import Header from '../header/Header';
 import NavTab from '../navTab/NavTab';
 import Promo from '../promo/Promo';
+import Techs from '../techs/Techs';
 
 import './Main.css';
 
@@ -20,6 +21,8 @@ function Main() {
 
       <main className='content'>
         <AboutProject
+        />
+        <Techs
         />
       </main>
     </>
