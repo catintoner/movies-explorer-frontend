@@ -1,0 +1,37 @@
+.project {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 20px;
+  padding: 0 0 19px;
+  border-bottom: 1px solid #E8E8E8;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+}
+
+.project__name {
+  cursor: pointer;
+  color: #000;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.project__name:hover {
+  opacity: .8;
+}
+
+.project__link-logo {
+  cursor: pointer;
+  width: 17px;
+  height: 18px;
+  transition: .2s;
+}
+
+.project__link-logo:hover {
+  opacity: .8;
+}
+
+.project:last-child {
+  margin: 0;
+}

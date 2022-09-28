@@ -1,8 +1,11 @@
 import React from 'react';
 
+import Portfolio from '../portfolio/Portfolio';
+
 import './AboutMe.css';
 
-import aboutMe__avatar from '../../images/aboutMe__avatar.jpg';
+import aboutMeAvatar from '../../images/aboutMe__avatar.jpg';
+
 
 function AboutMe() {
   return (
@@ -34,10 +37,12 @@ function AboutMe() {
           Спасибо команде Яндекс.Практикум за поддержку и стимул!
         </p>
         <div className='aboutMe__avatar-container'>
-        <img className='aboutMe__avatar' src={aboutMe__avatar} alt='Фото создателя проекта. Молодой улыбающийся парень на фоне природы'/>
+        <img className='aboutMe__avatar' src={aboutMeAvatar} alt='Фото создателя проекта. Молодой улыбающийся парень на фоне природы'/>
         </div>
 
       </article>
+      <Portfolio
+      />
 
     </section>
   );
