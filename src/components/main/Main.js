@@ -1,6 +1,7 @@
 import React from 'react';
 import AboutMe from '../aboutMe/AboutMe';
 import AboutProject from '../aboutProject/AboutProject';
+import Footer from '../footer/Footer';
 import Header from '../header/Header';
 import NavTab from '../navTab/NavTab';
 import Promo from '../promo/Promo';
@@ -20,7 +21,7 @@ function Main() {
         />
       </header>
 
-      <main className='content'>
+      <main>
         <AboutProject
         />
         <Techs
@@ -28,6 +29,10 @@ function Main() {
         <AboutMe
         />
       </main>
+      <footer>
+        <Footer
+        />
+      </footer>
     </>
   );
 }

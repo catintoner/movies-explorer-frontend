@@ -1,10 +1,10 @@
 .aboutProject__container {
   max-width: calc(100% - 70px*2);
-  margin: 0 auto 110px;
+  margin: 0 auto 140px;
 }
 
 .aboutProject__title {
-  margin: 0 0 75px;
+  margin: 0 0 70px;
   padding: 110px 0 23px;
   border-bottom: 1px solid #000;
   font-weight: 400;

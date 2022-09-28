@@ -1,6 +1,6 @@
 .aboutMe__container {
   max-width: calc(100% - 70px*2);
-  margin: 0 auto;
+  margin: 0 auto 105px;
 }
 
 .aboutMe__title {
@@ -19,6 +19,9 @@
     "name avatar"
     "subtitle avatar"
     "description avatar";
+    grid-template-rows: max-content;
+    column-gap: 270px;
+    justify-content: space-between;
 }
 
 .aboutMe__name {

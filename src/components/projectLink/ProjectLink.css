@@ -18,7 +18,7 @@
 }
 
 .project__name:hover {
-  opacity: .8;
+  opacity: .7;
 }
 
 .project__link-logo {
@@ -29,9 +29,10 @@
 }
 
 .project__link-logo:hover {
-  opacity: .8;
+  opacity: .7;
 }
 
 .project:last-child {
+  border: none;
   margin: 0;
 }

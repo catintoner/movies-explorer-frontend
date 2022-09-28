@@ -1,11 +1,16 @@
+.techs {
+  max-width: 100%;
+  background-color: #F5F5F5;
+}
+
 .techs__container {
   max-width: calc(100% - 70px*2);
-  margin: 0 auto 100px;
+  margin: 0 auto;
 }
 
 .techs__title {
-  margin: 0 0 70px;
-  padding: 110px 0 23px;
+  margin: 0 0 90px;
+  padding: 100px 0 23px;
   border-bottom: 1px solid #000;
   font-weight: 400;
   font-size: 22px;
@@ -35,7 +40,7 @@
 .techs__used-technologies {
   max-width: 690px;
   margin: 0 auto;
-  padding: 0;
+  padding: 0 0 100px;
   list-style-type: none;
   display: grid;
   justify-content: center;
