@@ -1,4 +1,5 @@
 import React from 'react';
+import AboutMe from '../aboutMe/AboutMe';
 import AboutProject from '../aboutProject/AboutProject';
 import Header from '../header/Header';
 import NavTab from '../navTab/NavTab';
@@ -23,6 +24,8 @@ function Main() {
         <AboutProject
         />
         <Techs
+        />
+        <AboutMe
         />
       </main>
     </>

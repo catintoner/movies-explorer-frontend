@@ -1,0 +1,65 @@
+.aboutMe__container {
+  max-width: calc(100% - 70px*2);
+  margin: 0 auto;
+}
+
+.aboutMe__title {
+  margin: 0 0 66px;
+  padding: 110px 0 23px;
+  border-bottom: 1px solid #000;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.aboutMe__info {
+  display: grid;
+  grid-template-areas:
+    "name avatar"
+    "subtitle avatar"
+    "description avatar";
+}
+
+.aboutMe__name {
+  margin: 0;
+  padding: 0;
+  grid-area: name;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+
+.aboutMe__subtitle {
+  margin: 0;
+  padding: 0;
+  grid-area: subtitle;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.aboutMe__description {
+  margin: 0;
+  padding: 0;
+  grid-area: description;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  mix-blend-mode: normal;
+}
+
+.aboutMe__avatar-container {
+  grid-area: avatar;
+  width: 270px;
+  height: 327px;
+}
+
+.aboutMe__avatar {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
