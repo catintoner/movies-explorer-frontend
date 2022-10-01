@@ -4,11 +4,25 @@ import Header from '../header/Header';
 import './Movies.css';
 import '../header/Header.css';
 
+import SearchForm from '../searchForm/SearchForm';
+import Footer from '../footer/Footer';
+
 function Movies(props) {
   return (
-    <Header
-    loggedIn={props.loggedIn}
-    />
+    <>
+      <header>
+        <Header
+          loggedIn={props.loggedIn}
+        />
+      </header>
+      <main>
+        <SearchForm
+        />
+      </main>
+      <Footer>
+        <Footer/>
+      </Footer>
+    </>
   );
 }
 

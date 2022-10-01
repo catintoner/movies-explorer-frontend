@@ -67,11 +67,11 @@
 }
 
 .header__logo_type_loggedIn {
-  margin: 0 44px 0 0;
+  margin: 0 47px 0 0;
 }
 
 .nav__films {
-  margin: 0 16px 0 0;
+  margin: 0 20px 0 0;
   font-weight: 500;
   font-size: 13px;
   line-height: 18px;
@@ -120,6 +120,7 @@
 }
 
 .profile__name {
+  padding: 0 0 0 11px;
   margin: 0;
   text-align: center;
 }
