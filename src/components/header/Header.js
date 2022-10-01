@@ -1,40 +1,81 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 
 import './Header.css';
 
-import headerLogo from '../../images/header__logo.svg';
-
-function Header() {
+function Header(props) {
   return (
-    <section className='header__navigation'>
-      <img className='header__logo' src={headerLogo} alt='Лого с улыбающимся смайликом' />
-      <nav className='header__account'>
-        <ul className='header__links'>
-          <li className='nav__signup'>
-            <Link
-              to={'/sign-up'}
-              className='header__link'
-            >
-              Регистрация
+    <nav className='header__navigation'>
+      <ul className='header__links'>
+        <li className={
+          `header__logo ${props.loggedIn && 'header__logo_type_loggedIn'}`
+        }>
+          <Link
+            to={'/'}
+            className='header__link logo'
+          >
+          </Link>
+        </li>
+        {props.loggedIn ?
+          <>
+            <li className='nav__films'>
+              <NavLink
+                to={'/movies'}
+                className='header__link'
+                activeClassName='header__link_type_active'
+              >
+                Фильмы
+              </NavLink>
+            </li>
 
-            </Link>
-          </li>
-          <li className='nav__signin'>
-            <Link
-              to={'sign-in'}
-              className='header__link header__link_type_signin'
-            >
+            <li className='nav__films nav__films_type_saved'>
+              <NavLink
+                to={'/saved-movies'}
+                className='header__link'
+                activeClassName='header__link_type_active'
+              >
+                Сохраненные фильмы
+              </NavLink>
+            </li>
 
-              Войти
+            <li className='nav__profile'>
+              <Link
+                to={'/profile'}
+                className='header__link header__link_type_profile'
+              >
+                <p className='profile__name'>
+                  Аккаунт
+                </p>
+                < div className='profile__logo'>
+                </div>
+              </Link>
+            </li>
+          </>
 
-            </Link>
-          </li>
-        </ul>
-      </nav>
+          :
 
+          <>
+            <li className='nav__signup'>
+              <Link
+                to={'/sign-up'}
+                className='header__link header__link_type_signup'
+              >
+                Регистрация
+              </Link>
+            </li>
 
-    </section>
+            <li className='nav__signin'>
+              <Link
+                to={'sign-in'}
+                className='header__link header__link_type_signin'
+              >
+                Войти
+              </Link>
+            </li>
+          </>
+        }
+      </ul>
+    </nav >
   )
 }
 

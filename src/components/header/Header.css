@@ -2,25 +2,89 @@
   max-width: calc(100% - 70px*2);
   margin: 0 auto;
   padding: 18px 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.header__logo {
- margin: 0 auto 0 0;
-}
-
-.header__account {
-  margin: 0;
 }
 
 .header__links {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   list-style-type: none;
+}
+
+.header__link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  transition: .2s;
+}
+
+.logo {
+  display: block;
+  background-image: url('../../images/header__logo.svg');
+  width: 38px;
+  height: 38px;
+}
+
+.header__link_type_active {
+  font-weight: 500;
+}
+
+.header__link_type_signup {
+  font-weight: 500;
+}
+
+.header__link_type_signin {
+  background-color: #000;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+.header__link_type_profile {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header__logo {
+  margin: 0 auto 0 0;
+  transition: .2s;
+}
+
+.header__logo:hover {
+  opacity: .8;
+}
+
+.header__logo_type_loggedIn {
+  margin: 0 44px 0 0;
+}
+
+.nav__films {
+  margin: 0 16px 0 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: right;
+  transition: .2s;
+}
+
+.nav__films:hover {
+  opacity: .8;
+}
+
+.nav__films_type_saved {
+  margin: 0 auto 0 0;
 }
 
 .nav__signup {
@@ -40,17 +104,32 @@
   opacity: .8;
 }
 
-.header__link {
-  text-decoration: none;
-  color: #000;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
+.nav__profile {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  width: 100px;
+  height: 32px;
+  border-radius: 40px;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  transition: .2s;
 }
 
-.header__link_type_signin {
-  background-color: #000;
-  color: #fff;
-  border-radius: 3px;
-  padding: 8px 20px;
+.nav__profile:hover {
+  opacity: .8;
+}
+
+.profile__name {
+  margin: 0;
+  text-align: center;
+}
+
+.profile__logo {
+  width: 26px;
+  height: 26px;
+  background-color: #F9F9F9;
+  background-image: url('../../images/header__acc-logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50px;
 }

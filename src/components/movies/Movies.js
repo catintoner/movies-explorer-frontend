@@ -4,9 +4,10 @@ import Header from '../header/Header';
 import './Movies.css';
 import '../header/Header.css';
 
-function Movies() {
+function Movies(props) {
   return (
     <Header
+    loggedIn={props.loggedIn}
     />
   );
 }

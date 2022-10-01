@@ -8,6 +8,11 @@ import Main from './main/Main';
 import Movies from './movies/Movies';
 
 function App() {
+
+  // const history = useHistory();
+
+  const [loggedIn, setLoggedIn] = React.useState(true);
+
   return (
     <div className='page'>
       <div className='page__container'>
@@ -15,10 +20,14 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Main
+              loggedIn={loggedIn}
             />
           </Route>
+
           <Route path='/movies'>
             <Movies
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
             />
           </Route>
         </Switch>

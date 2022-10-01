@@ -9,11 +9,12 @@ import Techs from '../techs/Techs';
 
 import './Main.css';
 
-function Main() {
+function Main(props) {
   return (
     <>
       <header className='header'>
         <Header
+        loggedIn={props.loggedIn}
         />
         <Promo
         />
