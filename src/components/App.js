@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';  //Route, Switch, 
 import './App.css';
 
 import Main from './main/Main';
+import Movies from './movies/Movies';
 
 function App() {
   return (
@@ -14,6 +15,10 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Main
+            />
+          </Route>
+          <Route path='/movies'>
+            <Movies
             />
           </Route>
         </Switch>
