@@ -16,7 +16,7 @@
   justify-content: flex-start;
   border-radius: 40px;
   background-color: #F9F9F9;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .searchForm__input {
@@ -31,11 +31,15 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 17px;
+  transition: .5s;
 }
 
 .searchForm__input:focus {
+  background-color: #F9F9F9;
   outline: none;
-  border: none;
+  border: 1px solid #F9F9F9;
+  box-shadow: 10px 25px 25px 10px #1615158a;
+  border-radius: 5px;
 }
 
 

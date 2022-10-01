@@ -21,6 +21,7 @@ function App() {
           <Route exact path='/'>
             <Main
               loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
             />
           </Route>
 

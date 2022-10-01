@@ -7,7 +7,18 @@ import '../header/Header.css';
 import SearchForm from '../searchForm/SearchForm';
 import Footer from '../footer/Footer';
 
+
+
 function Movies(props) {
+
+//временное решение
+React.useEffect(
+  () => {
+  props.setLoggedIn(true);
+  }
+)
+
+
   return (
     <>
       <header>
