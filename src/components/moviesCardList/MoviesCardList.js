@@ -4,39 +4,67 @@ import './MoviesCardList.css';
 
 import MoviesCard from '../moviesCard/MoviesCard';
 
-function MoviesCardList(films) {
+function MoviesCardList(props) {
+  const films = [];
+
+  React.useEffect(
+    () => {
+
+      for (let count = 0; count < 3; count++) {
+        films.push(<MoviesCard
+          likeBtnClassName={props.likeBtnClassName}
+        />);
+      }
+      console.log(films);
+    });
+
   return (
     <section className='cardList__container'>
-      {/* {films.map((film) => {
+      {films.map((film) => {
         return (
-          <MoviesCard
-          />
-        );
-      })} */}
-      <MoviesCard
+          // <MoviesCard
+          //   likeBtnClassName={props.likeBtnClassName}
+          // />
+          film
+        )
+      }
+      )}
+      {/* <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
+        likeBtnClassName={props.likeBtnClassName}
       />
       <MoviesCard
-      />
+        likeBtnClassName={props.likeBtnClassName}
+      /> */}
     </section>
   );
 }

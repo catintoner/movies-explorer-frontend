@@ -6,6 +6,7 @@ import './App.css';
 
 import Main from './main/Main';
 import Movies from './movies/Movies';
+import SavedMovies from './savedMovies/SavedMovies';
 
 function App() {
 
@@ -27,8 +28,16 @@ function App() {
 
           <Route path='/movies'>
             <Movies
-            loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              likeBtnClassName='card__btn-like_status_active'
+            />
+          </Route>
+          <Route path='/saved-movies'>
+            <SavedMovies
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              likeBtnClassName='card__btn-like_status_delete'
             />
           </Route>
         </Switch>

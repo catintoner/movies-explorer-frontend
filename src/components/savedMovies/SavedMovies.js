@@ -1,34 +1,29 @@
 import React from 'react';
-import Header from '../header/Header';
-
-import './Movies.css';
-import '../header/Header.css';
-
-import SearchForm from '../searchForm/SearchForm';
-import Preloader from '../preloader/Preloader';
-import MoviesCardList from '../moviesCardList/MoviesCardList';
 import Footer from '../footer/Footer';
+import Header from '../header/Header';
+import MoviesCardList from '../moviesCardList/MoviesCardList';
+import Preloader from '../preloader/Preloader';
+import SearchForm from '../searchForm/SearchForm';
 
+import './SavedMovies.css';
 
+function SavedMovies(props) {
 
-function Movies(props) {
-
-  //временное решение
   React.useEffect(
     () => {
       props.setLoggedIn(true);
     }
   )
 
-
   return (
+
     <>
       <header>
         <Header
-          loggedIn={props.loggedIn}
+        loggedIn={props.loggedIn}
         />
       </header>
-      <main className='movies__container'>
+      <main>
         <SearchForm
         />
         <Preloader
@@ -36,15 +31,13 @@ function Movies(props) {
         <MoviesCardList
           likeBtnClassName={props.likeBtnClassName}
         />
-        <button className='movies__btn-more'>
-          Ещё
-        </button>
       </main>
       <footer>
-        <Footer />
+        <Footer
+        />
       </footer>
     </>
   );
 }
 
-export default Movies;
+export default SavedMovies;

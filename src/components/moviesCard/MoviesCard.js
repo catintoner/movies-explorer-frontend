@@ -4,9 +4,9 @@ import './MoviesCard.css';
 
 import cardDevelop from '../../images/card__develop.jpg';
 
-function MoviesCard() {
+function MoviesCard(props) {
 
-  const [btnLikeStatus, setBtnLikeStatus] = React.useState(true);
+  const [btnLikeStatus, setBtnLikeStatus] = React.useState(false);
 
   function handleLikeClick() {
     if (btnLikeStatus) {
@@ -27,7 +27,7 @@ function MoviesCard() {
         <p className='card__time-duration'>
           16h 16min
         </p>
-        <button className={`card__btn-like ${btnLikeStatus ? '' : 'card__btn-like_status_active'}`}
+        <button className={`card__btn-like ${btnLikeStatus ? '' : props.likeBtnClassName}`}
           type='button'
           onClick={handleLikeClick}
         >
