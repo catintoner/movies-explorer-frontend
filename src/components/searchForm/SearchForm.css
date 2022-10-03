@@ -5,6 +5,7 @@
 
 .searchForm__container {
   padding: 62px 0 69px;
+  margin: 0 0 10px;
   border-bottom: 1px solid #E8E8E8;
 }
 
@@ -41,7 +42,6 @@
   box-shadow: 10px 25px 25px 10px #1615158a;
   border-radius: 5px;
 }
-
 
 .searchForm__icon {
   padding: 0;

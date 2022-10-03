@@ -1,0 +1,25 @@
+.movies__container {
+  margin: 0 0 75px;
+}
+
+.movies__btn-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  border: 1px solid #E8E8E8;
+  background-color: #fff;
+  border-radius: 6px;
+  min-height: 36px;
+  width: 320px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.movies__btn-more:hover {
+  opacity: .8;
+}

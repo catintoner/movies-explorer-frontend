@@ -10,6 +10,14 @@ import Techs from '../techs/Techs';
 import './Main.css';
 
 function Main(props) {
+
+    //временное решение
+    React.useEffect(
+      () => {
+        props.setLoggedIn(false);
+      }
+    )
+
   return (
     <>
       <header className='header'>
