@@ -24,7 +24,7 @@
   transition: .2s;
 }
 
-.logo {
+.header__link_type_logo {
   display: block;
   background-image: url('../../images/header__logo.svg');
   width: 38px;

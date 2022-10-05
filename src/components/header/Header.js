@@ -12,7 +12,7 @@ function Header(props) {
         }>
           <Link
             to={'/'}
-            className='header__link logo'
+            className='header__link header__link_type_logo'
           >
           </Link>
         </li>

@@ -6,6 +6,7 @@ import './App.css';
 
 import Main from './main/Main';
 import Movies from './movies/Movies';
+import Profile from './profile/Profile';
 import SavedMovies from './savedMovies/SavedMovies';
 
 function App() {
@@ -38,6 +39,12 @@ function App() {
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               likeBtnClassName='card__btn-like_status_delete'
+            />
+          </Route>
+          <Route path='/profile'>
+            <Profile
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
             />
           </Route>
         </Switch>

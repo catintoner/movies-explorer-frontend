@@ -12,7 +12,6 @@ function MoviesCardList(props) {
     for (let count = 0; count < counter; count++) {
       movies.push(1 + (Math.random() * (100 - 1)));
     }
-    console.log(movies);
     setFilms(movies);
   }
 
@@ -33,42 +32,6 @@ function MoviesCardList(props) {
         )
       }
       )}
-      {/* <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      />
-      <MoviesCard
-        likeBtnClassName={props.likeBtnClassName}
-      /> */}
     </section>
   );
 }
