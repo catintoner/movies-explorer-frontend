@@ -29,6 +29,7 @@ function SavedMovies(props) {
         <Preloader
         />
         <MoviesCardList
+          count={3}
           likeBtnClassName={props.likeBtnClassName}
         />
       </main>

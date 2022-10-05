@@ -5,27 +5,31 @@ import './MoviesCardList.css';
 import MoviesCard from '../moviesCard/MoviesCard';
 
 function MoviesCardList(props) {
-  const films = [];
+  const [films, setFilms] = React.useState([]);
+
+  function addValues(counter) {
+    const movies = [];
+    for (let count = 0; count < counter; count++) {
+      movies.push(1 + (Math.random() * (100 - 1)));
+    }
+    console.log(movies);
+    setFilms(movies);
+  }
 
   React.useEffect(
     () => {
-
-      for (let count = 0; count < 3; count++) {
-        films.push(<MoviesCard
-          likeBtnClassName={props.likeBtnClassName}
-        />);
-      }
-      console.log(films);
-    });
+      addValues(props.count);
+    }, [props.count]
+  );
 
   return (
     <section className='cardList__container'>
       {films.map((film) => {
         return (
-          // <MoviesCard
-          //   likeBtnClassName={props.likeBtnClassName}
-          // />
-          film
+          <MoviesCard
+            key={film}
+            likeBtnClassName={props.likeBtnClassName}
+          />
         )
       }
       )}

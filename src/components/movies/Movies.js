@@ -34,6 +34,7 @@ function Movies(props) {
         <Preloader
         />
         <MoviesCardList
+          count={12}
           likeBtnClassName={props.likeBtnClassName}
         />
         <button className='movies__btn-more'>
