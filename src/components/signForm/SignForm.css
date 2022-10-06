@@ -1,0 +1,138 @@
+.sign__container {
+  margin: 0 auto;
+  max-width: 396px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sign__header {
+  margin: 0 0 40px;
+  padding: 70px 0 0;
+}
+
+.sign__logo {
+  display: block;
+  background-image: url('../../images/header__logo.svg');
+  width: 38px;
+  height: 38px;
+  margin: 0 0 40px;
+}
+
+.sign__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.sign__main {
+  max-width: 100%;
+  margin: 0 0 17px;
+}
+
+.sign-form__container {
+  max-width: 396px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sign-form__label {
+  margin: 0 0 10px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+
+.sign-form__input {
+  margin: 0 0 10px;
+  padding: 0 15px;
+  border: none;
+  outline: none;
+  width: 366px;
+  min-height: 46px;
+  background-color: #F9F9F9;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  transition: .5s;
+}
+
+.sign-form__input:focus {
+  margin: 0;
+  background-color: #F9F9F9;
+  outline: none;
+  border: 1px solid #F9F9F9;
+  box-shadow: 10px 10px 25px 1px #1615158a;
+  border-radius: 5px;
+}
+
+.sign-form__input:invalid {
+  color: #FF4062;
+}
+
+.sign-form__error {
+  min-height: 12px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF4062;
+}
+
+.sign-form__error_type_hidden {
+  opacity: 0;
+}
+
+.sign-form__submit {
+  min-height: 45px;
+  width: 100%;
+  color: #fff;
+  font-weight: 500;
+  line-height: 17px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.sign-form__submit:hover {
+  opacity: .8;
+}
+
+.sign__footer {
+  margin: 0 0 70px;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.sign__quote {
+  margin: 0 6px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #A0A0A0;
+}
+
+.sign__link {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #000000;
+  transition: .2s;
+}
+
+.sign__link:hover {
+  opacity: .7;
+}

@@ -6,7 +6,7 @@
 }
 
 .profile__form {
-  max-width: calc(100% - 435px*2);
+  max-width: 410px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -78,6 +78,10 @@
   color: #FF4062;
 }
 
+.form__error_type_hidden {
+  opacity: 0;
+}
+
 .form__submit {
   margin: 0 0 16px;
   font-weight: 400;
@@ -93,6 +97,22 @@
 
 .form__submit:hover {
   opacity: .7;
+}
+
+.form__submit_type_active {
+  min-height: 45px;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  transition: .2s;
+}
+
+.form__submit_type_active:hover {
+  opacity: .8;
 }
 
 .profile__exit-btn {

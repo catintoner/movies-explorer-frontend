@@ -12,6 +12,16 @@ function Profile(props) {
     }
   );
 
+  const [infoEdit, setInfoEdit] = React.useState(false);
+
+  function handleEditActivate() {
+    if (!infoEdit) {
+      setInfoEdit(true);
+    } else {
+      setInfoEdit(false);
+    }
+  }
+
   return (
     <>
       <header>
@@ -37,10 +47,11 @@ function Profile(props) {
               id='name_edit'
               type='text'
               autoComplete='off'
+              disabled={!infoEdit}
             >
             </input>
             <span
-              className='form__error'
+              className='form__error form__error_type_hidden'
             >
               Какая-то ошибка, например
             </span>
@@ -57,24 +68,27 @@ function Profile(props) {
               id='email_edit'
               defaultValue='www.ya.ru'
               autoComplete='off'
+              disabled={!infoEdit}
             >
             </input>
             <span
-              className='form__error'
+              className='form__error form__error_type_hidden'
             >
               Какая-то ошибка, например
             </span>
           </div>
           <input
-          className='form__submit'
+          className={`form__submit ${infoEdit && 'form__submit_type_active'}`}
           type='submit'
           value='Редактировать'
+          onClick={handleEditActivate}
           >
           </input>
         </form>
         <Link
           to='/'
           className='profile__exit-btn'
+          hidden={infoEdit}
         >
           Выйти из профиля
         </Link>

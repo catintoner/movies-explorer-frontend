@@ -3,10 +3,11 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';  //Route, Switch, useHistory,
 
 import './App.css';
-
+import Login from './login/Login';
 import Main from './main/Main';
 import Movies from './movies/Movies';
 import Profile from './profile/Profile';
+import Register from './register/Register';
 import SavedMovies from './savedMovies/SavedMovies';
 
 function App() {
@@ -45,6 +46,14 @@ function App() {
             <Profile
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
+            />
+          </Route>
+          <Route path='/sign-up'>
+            <Register
+            />
+          </Route>
+          <Route path='/sign-in'>
+            <Login
             />
           </Route>
         </Switch>
