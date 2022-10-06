@@ -1,18 +1,23 @@
 import React from 'react';
 
-import { Route, Switch, withRouter } from 'react-router-dom';  //Route, Switch, useHistory,
+import { Route, Switch, withRouter, useHistory } from 'react-router-dom';  //Route, Switch, useHistory,
 
 import './App.css';
 import Login from './login/Login';
 import Main from './main/Main';
 import Movies from './movies/Movies';
+import PageNotFound from './pageNotFound/PageNotFound';
 import Profile from './profile/Profile';
 import Register from './register/Register';
 import SavedMovies from './savedMovies/SavedMovies';
 
 function App() {
 
-  // const history = useHistory();
+  const history = useHistory();
+
+  function handleReturnBack() {
+    history.goBack();
+  }
 
   const [loggedIn, setLoggedIn] = React.useState(true);
 
@@ -28,32 +33,37 @@ function App() {
             />
           </Route>
 
-          <Route path='/movies'>
+          <Route exact path='/movies'>
             <Movies
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               likeBtnClassName='card__btn-like_status_active'
             />
           </Route>
-          <Route path='/saved-movies'>
+          <Route exact path='/saved-movies'>
             <SavedMovies
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
               likeBtnClassName='card__btn-like_status_delete'
             />
           </Route>
-          <Route path='/profile'>
+          <Route exact path='/profile'>
             <Profile
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
             />
           </Route>
-          <Route path='/sign-up'>
+          <Route exact path='/sign-up'>
             <Register
             />
           </Route>
-          <Route path='/sign-in'>
+          <Route exact path='/sign-in'>
             <Login
+            />
+          </Route>
+          <Route path='*'>
+            <PageNotFound
+            handleReturnBack={handleReturnBack}
             />
           </Route>
         </Switch>

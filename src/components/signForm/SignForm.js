@@ -29,6 +29,7 @@ function SignForm(props) {
             className='sign-form__input'
             type='email'
             id='sign-email'
+            autoComplete='off'
           >
           </input>
           <span className='sign-form__error sign-form__error_type_hidden'>

@@ -1,0 +1,38 @@
+.notFound__container {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notFound__title {
+  margin: 0;
+  padding: 246px 0 0;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  text-align: center;
+}
+
+.notFound__subtitle {
+  margin: 0 0 184px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.notFound__back {
+  background-color: transparent;
+  border: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.notFound__back:hover {
+  opacity: .7;
+}

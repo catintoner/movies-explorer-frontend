@@ -25,6 +25,7 @@ function Register() {
         className='sign-form__input'
         type='text'
         id='sign-name'
+        autoComplete='off'
       >
       </input>
       <span className='sign-form__error sign-form__error_type_hidden'>

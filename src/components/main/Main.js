@@ -22,8 +22,6 @@ function Main(props) {
   )
 
   function handleScroll() {
-    console.log(scroll);
-    console.log(scroll.scrollTo);
     scroll.scrollTo(650);
   }
 
