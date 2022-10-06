@@ -14,7 +14,8 @@ function Profile(props) {
 
   const [infoEdit, setInfoEdit] = React.useState(false);
 
-  function handleEditActivate() {
+  function handleEditActivate(evt) {
+    evt.preventDefault();
     if (!infoEdit) {
       setInfoEdit(true);
     } else {
