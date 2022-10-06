@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { animateScroll as scroll } from 'react-scroll';
+
 import AboutMe from '../aboutMe/AboutMe';
 import AboutProject from '../aboutProject/AboutProject';
 import Footer from '../footer/Footer';
@@ -11,22 +14,29 @@ import './Main.css';
 
 function Main(props) {
 
-    //временное решение
-    React.useEffect(
-      () => {
-        props.setLoggedIn(false);
-      }
-    )
+  //временное решение
+  React.useEffect(
+    () => {
+      props.setLoggedIn(false);
+    }
+  )
+
+  function handleScroll() {
+    console.log(scroll);
+    console.log(scroll.scrollTo);
+    scroll.scrollTo(650);
+  }
 
   return (
     <>
       <header className='header'>
         <Header
-        loggedIn={props.loggedIn}
+          loggedIn={props.loggedIn}
         />
         <Promo
         />
         <NavTab
+        handleScroll={handleScroll}
         />
       </header>
 

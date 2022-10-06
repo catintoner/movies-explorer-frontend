@@ -3,6 +3,7 @@ import React from 'react';
 import './AboutProject.css';
 
 function AboutProject() {
+
   return (
     <section className='aboutProject__container'>
       <h2 className='aboutProject__title'>

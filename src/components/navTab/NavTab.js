@@ -2,10 +2,15 @@ import React from 'react';
 
 import './NavTab.css';
 
-function NavTab() {
+function NavTab(props) {
+
+
+
   return (
     <section className='navTab__container'>
-      <button className='navTab__button'>
+      <button
+      onClick={props.handleScroll}
+       className='navTab__button'>
         Узнать больше
       </button>
     </section>
