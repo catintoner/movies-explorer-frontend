@@ -78,3 +78,24 @@
   text-align: center;
   color: #A0A0A0;
 }
+
+@media screen and (max-width: 769px) {
+  .aboutProject__container {
+    max-width: calc(100% - 50px*2);
+    margin-bottom: 120px;
+  }
+
+  .aboutProject__title {
+    padding-top: 90px;
+  }
+
+  .description__info {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 22px;
+  }
+
+  .aboutProject__description {
+    margin-bottom: 68px;
+  }
+}

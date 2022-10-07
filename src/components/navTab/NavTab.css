@@ -19,3 +19,9 @@
 .navTab__button:hover {
   opacity: .8;
 }
+
+@media screen and (max-width: 769px) {
+  .navTab__container {
+    max-width: fit-content;
+  }
+}

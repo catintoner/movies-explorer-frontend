@@ -43,3 +43,9 @@
 .footer__link:hover {
   opacity: .7;
 }
+
+@media screen and (max-width: 769px) {
+  .footer {
+    max-width: calc(100% - 30px*2);
+  }
+}

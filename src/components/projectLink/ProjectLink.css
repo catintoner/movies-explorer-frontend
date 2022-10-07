@@ -36,3 +36,9 @@
   border: none;
   margin: 0;
 }
+
+@media screen and (max-width: 769px) {
+  .project {
+    font-size: 28px;
+  }
+}

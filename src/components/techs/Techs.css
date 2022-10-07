@@ -61,3 +61,36 @@
   line-height: 17px;
   letter-spacing: -0.04em;
 }
+
+@media screen and (max-width: 769px) {
+  .techs__container {
+    max-width: calc(100% - 50px*2);
+  }
+
+  .techs__title {
+    margin-bottom: 80px;
+    padding-top: 90px;
+  }
+
+  .techs__subtitle {
+    margin-bottom: 22px;
+  }
+
+  .techs__about {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 85px;
+  }
+
+  .techs__used-technologies {
+    grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    padding-bottom: 90px;
+  }
+
+  .techs__technology {
+    width: 84px;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 21px 0;
+  }
+}

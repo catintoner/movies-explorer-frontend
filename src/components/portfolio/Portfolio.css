@@ -26,3 +26,16 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 1170px) {
+  .portfolio__container {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .portfolio__title {
+    margin-bottom: 90px;
+  }
+}

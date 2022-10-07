@@ -19,9 +19,9 @@
     "name avatar"
     "subtitle avatar"
     "description avatar";
-    grid-template-rows: max-content;
-    column-gap: 270px;
-    justify-content: space-between;
+  grid-template-rows: max-content;
+  column-gap: 21%;
+  justify-content: space-between;
 }
 
 .aboutMe__name {
@@ -65,4 +65,43 @@
   height: 100%;
   object-fit: cover;
   object-position: top;
+}
+
+@media screen and (max-width: 1170px) {
+  .aboutMe__info {
+    column-gap: 6%;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .aboutMe__container {
+    margin-bottom: 90px;
+    max-width: calc(100% - 50px*2);
+  }
+
+  .aboutMe__title {
+    padding-top: 90px;
+  }
+
+  .aboutMe__name {
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .aboutMe__subtitle {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 20px;
+  }
+
+  .aboutMe__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .aboutMe__avatar-container {
+    width: 255px;
+    height: 307px;
+  }
 }

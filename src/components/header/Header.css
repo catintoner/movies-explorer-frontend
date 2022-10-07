@@ -134,3 +134,9 @@
   background-position: center;
   border-radius: 50px;
 }
+
+@media screen and (max-width: 769px) {
+  .header__navigation {
+    max-width: calc(100% - 30px*2);
+  }
+}
