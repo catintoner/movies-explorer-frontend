@@ -105,3 +105,49 @@
     height: 307px;
   }
 }
+
+@media screen and (max-width: 567px) {
+  .aboutMe__container {
+    max-width: calc(100% - 18px*2);
+    margin-bottom: 51px;
+  }
+
+  .aboutMe__title {
+    padding: 70px 0 28px;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 60px;
+  }
+
+  .aboutMe__info {
+    margin-bottom: 40px;
+    grid-template-areas:
+      "avatar"
+      "name"
+      "subtitle"
+      "description";
+  }
+
+  .aboutMe__avatar-container {
+    width: 292px;
+    height: 352px;
+    justify-self: center;
+    margin-bottom: 40px;
+  }
+
+  .aboutMe__name {
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 20px;
+  }
+
+  .aboutMe__subtitle {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .aboutMe__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

@@ -99,3 +99,58 @@
     margin-bottom: 68px;
   }
 }
+
+@media screen and (max-width: 567px) {
+  .aboutProject__container {
+    max-width: calc(100% - 18px*2);
+    margin-bottom: 70px;
+  }
+
+  .aboutProject__title {
+    padding-top: 70px;
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutProject__info {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutProject__description {
+    margin-bottom: 56px;
+  }
+
+  .aboutProject__description:last-child {
+    margin-bottom: 60px;
+    padding: 0;
+  }
+
+  .aboutProject__deadlines {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .description__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+
+  .description__info {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 0;
+  }
+
+  .deadlines__term {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .deadlines__quote {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+}
