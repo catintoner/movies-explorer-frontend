@@ -17,7 +17,6 @@
   justify-content: flex-start;
   border-radius: 40px;
   background-color: #F9F9F9;
-  /* background-color: aqua; */
 }
 
 .searchForm__input {
@@ -61,4 +60,40 @@
 
 .searchForm__icon:hover {
   opacity: .8;
+}
+
+@media screen and (max-width: 1150px) {
+
+  .container {
+    max-width: calc(100% - 30px*2);
+  }
+
+  .searchForm__container {
+    padding: 82px 0 52px;
+  }
+
+}
+
+@media screen and (max-width: 567px) {
+  .container {
+    max-width: calc(100% - 14px*2);
+  }
+
+.searchForm__container {
+  padding-bottom: 48px;
+}
+
+  .searchForm__input {
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .checkbox__toggle-label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .searchForm__search-string {
+margin-bottom: 45px;
+  }
 }

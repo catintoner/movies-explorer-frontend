@@ -12,7 +12,7 @@ function SearchForm() {
             className='searchForm__input'
             id='input'
             name='input'
-            placeholder='Фильмы'
+            placeholder='Фильм'
             type='text'
             autoComplete='off'
           >

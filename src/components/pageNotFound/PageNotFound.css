@@ -36,3 +36,13 @@
 .notFound__back:hover {
   opacity: .7;
 }
+
+@media screen and (max-width: 1150px) {
+  .notFound__title {
+    padding-top: 407px;
+  }
+
+  .notFound__back {
+    margin-bottom: 222px;
+  }
+}

@@ -54,7 +54,7 @@
   width: 30px;
   height: 30px;
   background-image: url('../../images/card__like_disactive.svg');
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
@@ -72,4 +72,38 @@
 
 .card__btn-like_status_delete {
   background-image: url('../../images/card__like_delete.svg');
+}
+
+@media screen and (max-width: 1150px) {
+  .card__photo {
+    width: 339px;
+    height: 190px;
+  }
+
+  .card__info {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .card__photo {
+    width: 300px;
+    height: 168px;
+    margin-bottom: 15px;
+  }
+
+  .card__info {
+    margin-bottom: 12px;
+  }
+
+  .card__title {
+    margin-bottom: 15px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .card__time-duration {
+    font-size: 10px;
+    line-height: 12px;
+  }
 }

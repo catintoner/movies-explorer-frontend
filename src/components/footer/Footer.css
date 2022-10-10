@@ -44,7 +44,7 @@
   opacity: .7;
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 1150px) {
   .footer {
     max-width: calc(100% - 30px*2);
     margin-bottom: 10px;
@@ -52,8 +52,16 @@
 }
 
 @media screen and (max-width: 567px) {
+  .footer {
+    max-width: calc(100% - 14px*2);
+    margin-bottom: 10px;
+  }
+
   .footer__title {
     margin-bottom: 30px;
+    padding: 75px 0 20px;
+    font-size: 12px;
+    line-height: 15px;
   }
 
   .footer__quote {
@@ -65,9 +73,14 @@
     margin: 0;
     order: 1;
     color: #A0A0A0;
+    font-size: 12px;
+    line-height: 15px;
   }
+
   .footer__link {
     margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 15px;
   }
 
   .footer__link:last-child {

@@ -137,3 +137,17 @@
 .profile__exit-btn:hover {
   opacity: .7;
 }
+
+@media screen and (max-width: 1150px) {
+  .profile__main {
+    padding: 235px 0 269px;
+  }
+
+  .form__title {
+    margin-bottom: 95px;
+  }
+
+  .form__field:last-of-type {
+    margin-bottom: 195px;
+  }
+}
