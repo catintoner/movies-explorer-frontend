@@ -46,3 +46,23 @@
     margin-bottom: 222px;
   }
 }
+
+@media screen and (max-width: 567px) {
+  .notFound__title {
+    padding-top: 330px;
+    margin-bottom: 10px;
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .notFound__subtitle {
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 285px;
+  }
+
+  .notFound__back {
+    font-size: 12px;
+    line-height: 15px
+  }
+}
