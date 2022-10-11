@@ -42,3 +42,10 @@
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 567px) {
+  .project {
+    font-size: 18px;
+    line-height: 28px
+  }
+}
