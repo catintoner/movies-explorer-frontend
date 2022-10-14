@@ -1,0 +1,254 @@
+.header__navigation {
+  max-width: calc(100% - 70px*2);
+  margin: 0 auto;
+  padding: 18px 0;
+}
+
+.header__links {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+}
+
+.header__link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  transition: .2s;
+}
+
+.header__link_type_logo {
+  display: block;
+  background-image: url('../../images/header__logo.svg');
+  width: 38px;
+  height: 38px;
+}
+
+.header__link_type_active {
+  font-weight: 500;
+}
+
+.header__link_type_active-burger {
+  border-bottom: 2px solid #000;
+}
+
+.header__link_type_signup {
+  font-weight: 500;
+}
+
+.header__link_type_signin {
+  background-color: #000;
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+.header__link_type_profile {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.header__logo {
+  margin: 0 auto 0 0;
+  transition: .2s;
+}
+
+.header__logo:hover {
+  opacity: .8;
+}
+
+.header__logo_type_loggedIn {
+  margin: 0 47px 0 0;
+}
+
+
+.header__burger-menu {
+  display: none;
+  z-index: 10;
+}
+
+.header__burger-label {
+  cursor: pointer;
+  height: 44px;
+  width: 44px;
+  background-image: url('../../images/burger-menu.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: .2s;
+  z-index: 10;
+}
+
+.header__burger-label:hover {
+  opacity: .8;
+}
+
+.header__burger-label_type_open {
+  background-image: url('../../images/burger__close.svg');
+}
+
+.nav__films {
+  margin: 0 20px 0 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: right;
+  transition: .2s;
+}
+
+.user__navigation {
+  background-color: #fff;
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  transition: visibility .3s, opacity .3s;
+  z-index: 1;
+  padding-top: 159px;
+}
+
+.user__navigation::before {
+  display: block;
+  content: '';
+  background-color: rgba(0, 0, 0, .5);
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  position: fixed;
+}
+
+.user__navigation_type_active {
+  display: flex;
+  margin: 0 0 28px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.burger__menu {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+}
+
+.nav__films:hover {
+  opacity: .8;
+}
+
+.nav__films_type_saved {
+  margin: 0 auto 0 0;
+}
+
+.nav__films_type_last-child {
+  margin-bottom: 621px;
+}
+
+.nav__signup {
+  margin: 0 30px 0 0;
+  transition: .2s;
+}
+
+.nav__signup:hover {
+  opacity: .7;
+}
+
+.nav__signin {
+  transition: .2s;
+}
+
+.nav__signin:hover {
+  opacity: .8;
+}
+
+.nav__profile {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  width: 100px;
+  height: 32px;
+  border-radius: 40px;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  transition: .2s;
+}
+
+.nav__profile:hover {
+  opacity: .8;
+}
+
+.profile__name {
+  padding: 0 0 0 11px;
+  margin: 0;
+  text-align: center;
+}
+
+.profile__logo {
+  width: 26px;
+  height: 26px;
+  background-color: #F9F9F9;
+  background-image: url('../../images/header__acc-logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50px;
+}
+
+@media screen and (max-width: 1150px) {
+  .header__navigation {
+    max-width: calc(100% - 30px*2);
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .header__navigation {
+    max-width: calc(100% - 18px*2);
+  }
+
+  .header__link {
+    font-size: 10px;
+  }
+
+  .nav__signup {
+    margin-right: 14px;
+  }
+
+  .header__link_type_signin {
+    padding: 7px 12px;
+  }
+
+  .user__navigation {
+    width: 100%;
+    padding-top: 144px;
+  }
+
+  .user__navigation::before {
+    width: 0;
+  }
+
+  .user__navigation_type_active {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 24px;
+  }
+
+  .nav__films_type_last-child {
+    margin-bottom: 444px;
+  }
+}
