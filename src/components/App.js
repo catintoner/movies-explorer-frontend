@@ -19,7 +19,10 @@ function App() {
     history.goBack();
   }
 
+
   const [loggedIn, setLoggedIn] = React.useState(true);
+
+
 
   return (
     <div className='page'>
@@ -63,7 +66,7 @@ function App() {
           </Route>
           <Route path='*'>
             <PageNotFound
-            handleReturnBack={handleReturnBack}
+              handleReturnBack={handleReturnBack}
             />
           </Route>
         </Switch>

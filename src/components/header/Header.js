@@ -19,7 +19,6 @@ function Header(props) {
   }
 
   React.useEffect(() => {
-    console.log(windowSize);
 
     function handleWindowResize() {
       setWindowSize(getWindowSize());
