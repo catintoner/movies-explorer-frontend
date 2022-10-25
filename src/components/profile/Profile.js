@@ -6,12 +6,6 @@ import './Profile.css';
 
 function Profile(props) {
 
-  React.useEffect(
-    () => {
-      props.setLoggedIn(true);
-    }
-  );
-
   const [infoEdit, setInfoEdit] = React.useState(false);
 
   function handleEditActivate(evt) {
@@ -86,13 +80,14 @@ function Profile(props) {
           >
           </input>
         </form>
-        <Link
-          to='/'
+        <button
+          type='button'
           className='profile__exit-btn'
           hidden={infoEdit}
+          onClick={props.handleLogout}
         >
           Выйти из профиля
-        </Link>
+        </button>
       </main>
     </>
   );

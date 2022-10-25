@@ -1,4 +1,7 @@
 import React from 'react';
+
+import { withRouter } from 'react-router-dom';
+
 import Header from '../header/Header';
 
 import './Movies.css';
@@ -12,14 +15,6 @@ import Footer from '../footer/Footer';
 
 
 function Movies(props) {
-
-  //временное решение
-  React.useEffect(
-    () => {
-      props.setLoggedIn(true);
-    }
-  )
-
 
   return (
     <>
@@ -48,4 +43,4 @@ function Movies(props) {
   );
 }
 
-export default Movies;
+export default withRouter(Movies);

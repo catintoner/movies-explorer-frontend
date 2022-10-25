@@ -5,7 +5,15 @@ import SignForm from '../signForm/SignForm';
 import './Register.css';
 
 
-function Register() {
+function Register(props) {
+
+  const [name, setName] = React.useState('');
+
+
+  function handleInputChange(evt, setInput) {
+    setInput(evt.target.value);
+  }
+
   return (
     <SignForm
       title='Добро пожаловать!'
@@ -14,6 +22,9 @@ function Register() {
       quoteFooter='Уже зарегистрированы?'
       footerLink='/sign-in'
       footerLinkName='Войти'
+      onSubmit={props.onSubmit}
+      handleInputChange={handleInputChange}
+      name={name}
     >
       <label
         htmlFor='sign-name'
@@ -26,6 +37,7 @@ function Register() {
         type='text'
         id='sign-name'
         autoComplete='off'
+        onChange={(evt) => handleInputChange(evt, setName)}
       >
       </input>
       <span className='sign-form__error sign-form__error_type_hidden'>

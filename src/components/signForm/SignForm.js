@@ -5,6 +5,24 @@ import { Link } from 'react-router-dom';
 import './SignForm.css';
 
 function SignForm(props) {
+
+  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState('');
+
+  function handleInputChange(evt, setInput) {
+    setInput(evt.target.value);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    if (props.name) {
+      props.onSubmit(email, password, props.name);
+    } else {
+      props.onSubmit(email, password);
+    }
+  }
+
   return (
     <section className='sign__container'>
       <header className='sign__header'>
@@ -17,7 +35,9 @@ function SignForm(props) {
         </h1>
       </header>
       <main className='sign__main'>
-        <form className='sign-form__container'>
+        <form className='sign-form__container'
+          onSubmit={handleSubmit}
+        >
           {props.children}
           <label
             htmlFor='sign-email'
@@ -30,6 +50,7 @@ function SignForm(props) {
             type='email'
             id='sign-email'
             autoComplete='off'
+            onChange={(evt) => handleInputChange(evt, setEmail)}
           >
           </input>
           <span className='sign-form__error sign-form__error_type_hidden'>
@@ -46,6 +67,7 @@ function SignForm(props) {
             type='password'
             id='sign-password'
             autoComplete='off'
+            onChange={(evt) => handleInputChange(evt, setPassword)}
           >
           </input>
           <span className={`sign-form__error ${props.lastInputErrorClass}`}>
