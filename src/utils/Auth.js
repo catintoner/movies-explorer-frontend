@@ -3,6 +3,7 @@ import { BASE_URL } from './constants';
 class Auth {
   constructor(options) {
     this._baseUrl = options.baseUrl;
+    this._headers = options.headers;
   }
 
   _checkResponse(res) {
@@ -17,9 +18,7 @@ class Auth {
   createUser(email, password, name) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({ email, password, name }),
       credentials: 'include'
     })
@@ -33,9 +32,7 @@ class Auth {
   loginUser(email, password) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       body: JSON.stringify({ email, password }),
       credentials: 'include'
     })
@@ -49,9 +46,7 @@ class Auth {
   logoutUser() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: this._headers,
       credentials: 'include'
     })
       .then(this._checkResponse)
@@ -73,4 +68,7 @@ class Auth {
 
 export const auth = new Auth({
   baseUrl: BASE_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  },
 })

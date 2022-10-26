@@ -151,3 +151,9 @@
     margin-bottom: 195px;
   }
 }
+
+@media screen and (max-width: 567px) {
+  .form__field {
+    max-width: 300px;
+  }
+}

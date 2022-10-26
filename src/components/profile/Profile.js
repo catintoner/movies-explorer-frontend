@@ -1,12 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import Header from '../header/Header';
 
 import './Profile.css';
 
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+
+
 function Profile(props) {
 
+  const currentUser = React.useContext(CurrentUserContext);
+
   const [infoEdit, setInfoEdit] = React.useState(false);
+
+  const [name, setName] = React.useState(currentUser.name);
+  const [email, setEmail] = React.useState(currentUser.email);
 
   function handleEditActivate(evt) {
     evt.preventDefault();
@@ -17,6 +25,17 @@ function Profile(props) {
     }
   }
 
+  function handleInputChange(evt, setInput) {
+    setInput(evt.target.value);
+    console.log(name, email);
+  }
+
+  function onSubmit(evt) {
+    evt.preventDefault();
+    props.handleUpdateUserInfo({ name, email });
+    setInfoEdit(false);
+  }
+
   return (
     <>
       <header>
@@ -25,9 +44,12 @@ function Profile(props) {
         />
       </header>
       <main className='profile__main'>
-        <form className='profile__form'>
+        <form
+          className='profile__form'
+          onSubmit={onSubmit}
+        >
           <h1 className='form__title'>
-            Привет, Дмитрий!
+            Привет, {currentUser.name}!
           </h1>
           <div className='form__field'>
             <label
@@ -38,11 +60,14 @@ function Profile(props) {
             </label>
             <input
               className='form__input'
-              defaultValue="Дмитрий"
+              defaultValue={currentUser.name}
               id='name_edit'
               type='text'
               autoComplete='off'
               disabled={!infoEdit}
+              onChange={(evt) =>
+                handleInputChange(evt, setName)
+              }
             >
             </input>
             <span
@@ -61,9 +86,12 @@ function Profile(props) {
             <input
               className='form__input'
               id='email_edit'
-              defaultValue='www.ya.ru'
+              defaultValue={currentUser.email}
               autoComplete='off'
               disabled={!infoEdit}
+              onChange={(evt) =>
+                handleInputChange(evt, setEmail)
+              }
             >
             </input>
             <span
@@ -73,10 +101,10 @@ function Profile(props) {
             </span>
           </div>
           <input
-          className={`form__submit ${infoEdit && 'form__submit_type_active'}`}
-          type='submit'
-          value='Редактировать'
-          onClick={handleEditActivate}
+            className={`form__submit ${infoEdit && 'form__submit_type_active'}`}
+            type={!infoEdit ? 'button' : 'submit'}
+            value='Редактировать'
+            onClick={!infoEdit ? handleEditActivate : null}
           >
           </input>
         </form>
