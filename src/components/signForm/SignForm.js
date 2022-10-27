@@ -6,20 +6,26 @@ import './SignForm.css';
 
 function SignForm(props) {
 
-  const [password, setPassword] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
 
-  function handleInputChange(evt, setInput) {
-    setInput(evt.target.value);
+  function handleInputChange(evt) {
+    const target = evt.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest('.sign-form__container').checkValidity());
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     if (props.name) {
-      props.onSubmit(email, password, props.name);
+      props.onSubmit(values.email, values.password, props.name);
     } else {
-      props.onSubmit(email, password);
+      props.onSubmit(values.email, values.password);
     }
   }
 
@@ -49,12 +55,14 @@ function SignForm(props) {
             className='sign-form__input'
             type='email'
             id='sign-email'
+            name='email'
             autoComplete='off'
-            onChange={(evt) => handleInputChange(evt, setEmail)}
+            onChange={handleInputChange}
+            required
           >
           </input>
-          <span className='sign-form__error sign-form__error_type_hidden'>
-            Что-то пошло не так...
+          <span className={`sign-form__error ${!errors.email && 'sign-form__error_type_hidden'}`}>
+            {errors.email}
           </span>
           <label
             htmlFor='sign-password'
@@ -66,17 +74,20 @@ function SignForm(props) {
             className='sign-form__input'
             type='password'
             id='sign-password'
+            name='password'
             autoComplete='off'
-            onChange={(evt) => handleInputChange(evt, setPassword)}
+            onChange={handleInputChange}
+            required
           >
           </input>
-          <span className={`sign-form__error ${props.lastInputErrorClass}`}>
-            Что-то пошло не так...
+          <span className={`sign-form__error ${props.lastInputErrorClass} ${!errors.password && 'sign-form__error_type_hidden'}`}>
+            {errors.password}
           </span>
           <input
-            className='sign-form__submit'
+            className={`sign-form__submit ${(!isValid && !props.validName) ? 'sign-form__submit_type_disabled' : ''}`}
             type='submit'
             value={props.submitName}
+            disabled={(!isValid && !props.validName) && true}
           >
           </input>
         </form>

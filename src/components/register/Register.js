@@ -9,9 +9,16 @@ function Register(props) {
 
   const [name, setName] = React.useState('');
 
+  const [error, setError] = React.useState({});
+  const [isValidName, setIsValidName] = React.useState(false);
 
-  function handleInputChange(evt, setInput) {
-    setInput(evt.target.value);
+  function handleInputChange(evt) {
+    const target = evt.target;
+    const name = target.name;
+    const value = target.value;
+    setName(value);
+    setError({ [name]: target.validationMessage });
+    setIsValidName(target.closest('.sign-form__container').checkValidity());
   }
 
   return (
@@ -23,8 +30,8 @@ function Register(props) {
       footerLink='/sign-in'
       footerLinkName='Войти'
       onSubmit={props.onSubmit}
-      handleInputChange={handleInputChange}
       name={name}
+      validName={isValidName}
     >
       <label
         htmlFor='sign-name'
@@ -36,12 +43,16 @@ function Register(props) {
         className='sign-form__input'
         type='text'
         id='sign-name'
+        name='name'
         autoComplete='off'
-        onChange={(evt) => handleInputChange(evt, setName)}
+        onChange={handleInputChange}
+        required
+        minLength={2}
+        maxLength={30}
       >
       </input>
-      <span className='sign-form__error sign-form__error_type_hidden'>
-        Что-то пошло не так...
+      <span className={`sign-form__error ${!error.name && 'sign-form__error_type_hidden'}`}>
+        {error.name}
       </span>
     </SignForm>
   )

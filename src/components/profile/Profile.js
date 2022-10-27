@@ -13,8 +13,9 @@ function Profile(props) {
 
   const [infoEdit, setInfoEdit] = React.useState(false);
 
-  const [name, setName] = React.useState(currentUser.name);
-  const [email, setEmail] = React.useState(currentUser.email);
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
 
   function handleEditActivate(evt) {
     evt.preventDefault();
@@ -25,14 +26,19 @@ function Profile(props) {
     }
   }
 
-  function handleInputChange(evt, setInput) {
-    setInput(evt.target.value);
-    console.log(name, email);
+  function handleInputChange(evt) {
+    const target = evt.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest('.profile__form').checkValidity());
   }
 
   function onSubmit(evt) {
     evt.preventDefault();
-    props.handleUpdateUserInfo({ name, email });
+    console.log(values);
+    props.handleUpdateUserInfo(values);
     setInfoEdit(false);
   }
 
@@ -62,18 +68,20 @@ function Profile(props) {
               className='form__input'
               defaultValue={currentUser.name}
               id='name_edit'
+              name='name'
               type='text'
               autoComplete='off'
               disabled={!infoEdit}
-              onChange={(evt) =>
-                handleInputChange(evt, setName)
-              }
+              onChange={handleInputChange}
+              required
+              minLength={2}
+              maxLength={30}
             >
             </input>
             <span
-              className='form__error form__error_type_hidden'
+              className={`form__error ${!errors.name && 'form__error_type_hidden'}`}
             >
-              Какая-то ошибка, например
+              {errors.name}
             </span>
           </div>
           <div className='form__field'>
@@ -86,25 +94,27 @@ function Profile(props) {
             <input
               className='form__input'
               id='email_edit'
+              name='email'
               defaultValue={currentUser.email}
               autoComplete='off'
               disabled={!infoEdit}
-              onChange={(evt) =>
-                handleInputChange(evt, setEmail)
-              }
+              onChange={handleInputChange}
+              required
+              type='email'
             >
             </input>
             <span
-              className='form__error form__error_type_hidden'
+              className={`form__error ${!errors.email && 'form__error_type_hidden'}`}
             >
-              Какая-то ошибка, например
+              {errors.email}
             </span>
           </div>
           <input
-            className={`form__submit ${infoEdit && 'form__submit_type_active'}`}
+            className={`form__submit ${infoEdit && 'form__submit_type_active'} ${(!isValid && infoEdit) && 'form__submit_type_disabled'}`}
             type={!infoEdit ? 'button' : 'submit'}
             value='Редактировать'
             onClick={!infoEdit ? handleEditActivate : null}
+            disabled={!infoEdit ? false : (!isValid ? true : false)}
           >
           </input>
         </form>

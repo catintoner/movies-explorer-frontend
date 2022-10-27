@@ -71,7 +71,7 @@ function App() {
 
   function handleRegistrationSubmit(email, password, name) {
     auth.createUser(email, password, name)
-      .then((res) => {
+      .then(() => {
         history.push('/sign-in');
       })
 
