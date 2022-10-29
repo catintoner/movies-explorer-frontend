@@ -7,7 +7,6 @@ class Auth {
   }
 
   _checkResponse(res) {
-    console.log(res);
     if (res.ok) {
       return res.json();
     }
@@ -37,10 +36,6 @@ class Auth {
       credentials: 'include'
     })
       .then(this._checkResponse)
-
-      .then((res) => {
-        localStorage.setItem("user", res);
-      })
   }
 
   logoutUser() {

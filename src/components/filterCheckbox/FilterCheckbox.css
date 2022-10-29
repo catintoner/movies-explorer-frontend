@@ -11,7 +11,6 @@
   margin: 0 12px;
   vertical-align: top;
   background-color: #EBEBEB;
-  ;
   outline: none;
   cursor: pointer;
   border-radius: 20px;
@@ -21,7 +20,7 @@
   transition: .5s;
 }
 
-.checkbox__toggle::after {
+.checkbox__toggle::before {
   content: '';
   display: inline-block;
   position: absolute;
@@ -36,7 +35,7 @@
   transition: .5s;
 }
 
-.checkbox__toggle:checked::after {
+.checkbox__toggle:checked::before {
   transform: translateX(100%);
   background-color: #fff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);

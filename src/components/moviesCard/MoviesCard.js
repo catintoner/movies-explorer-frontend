@@ -2,34 +2,41 @@ import React from 'react';
 
 import './MoviesCard.css';
 
-import cardDevelop from '../../images/card__develop.jpg';
-
 function MoviesCard(props) {
 
   const [btnLikeStatus, setBtnLikeStatus] = React.useState(false);
 
-  function handleLikeClick() {
-    if (btnLikeStatus) {
-      setBtnLikeStatus(false);
-    } else {
+  React.useEffect(() => {
+    let likedMovie = props.savedMovies.find(movie => movie.movieId === props.film.id)
+    if (likedMovie) {
       setBtnLikeStatus(true);
     }
+  }, [props.savedMovies]);
 
+  function handleLike() {
+
+    if (!btnLikeStatus) {
+      props.handleLikeClick(props);
+      setBtnLikeStatus(true);
+    } else {
+      setBtnLikeStatus(false);
+      props.handleDeleteClick(props);
+    }
   }
 
   return (
     <article className='card'>
-      <img className='card__photo' src={cardDevelop} alt='Кадр из фильма' />
+      <img className='card__photo' src={` https://api.nomoreparties.co/${props.picture}`} alt='Кадр из фильма' />
       <div className='card__info'>
         <h4 className='card__title'>
-          Something name..
+          {props.nameRU}
         </h4>
         <p className='card__time-duration'>
-          16h 16min
+          {`${Math.floor(props.duration / 60)}ч ${props.duration % 60}мин`}
         </p>
-        <button className={`card__btn-like ${btnLikeStatus ? '' : props.likeBtnClassName}`}
+        <button className={`card__btn-like ${btnLikeStatus ? props.likeBtnClassName : ''}`}
           type='button'
-          onClick={handleLikeClick}
+          onClick={handleLike}
         >
         </button>
       </div>

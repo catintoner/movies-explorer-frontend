@@ -3,35 +3,45 @@ import React from 'react';
 import './MoviesCardList.css';
 
 import MoviesCard from '../moviesCard/MoviesCard';
+import { useLocation } from 'react-router-dom';
 
-function MoviesCardList(props) {
-  const [films, setFilms] = React.useState([]);
+function MoviesCardList({
+  movies,
+  likeBtnClassName,
+  handleLikeClick,
+  handleDeleteClick,
+  savedMovies,
+}) {
 
-  function addValues(counter) {
-    const movies = [];
-    for (let count = 0; count < counter; count++) {
-      movies.push(1 + (Math.random() * (100 - 1)));
+  const location = useLocation();
+
+  const [moviesForRender, setMoviesForRender] = React.useState([]);
+
+  React.useEffect(() => {
+    if (location.pathname === '/movies') {
+      setMoviesForRender(movies);
     }
-    setFilms(movies);
-  }
-
-  React.useEffect(
-    () => {
-      addValues(props.count);
-    }, [props.count]
-  );
+  }, [movies, location.pathname]);
 
   return (
     <section className='cardList__container'>
-      {films.map((film) => {
+      {moviesForRender.length > 0 ? moviesForRender.map((film) => {
         return (
           <MoviesCard
-            key={film}
-            likeBtnClassName={props.likeBtnClassName}
+            film={film}
+            key={film.id}
+            likeBtnClassName={likeBtnClassName}
+            handleLikeClick={handleLikeClick}
+            handleDeleteClick={handleDeleteClick}
+            savedMovies={savedMovies}
+            picture={film.image.url}
+            nameRU={film.nameRU}
+            duration={film.duration}
           />
         )
       }
-      )}
+      ) : <p className='cardList__infoMessage'>Ничего не найдено</p>
+      }
     </section>
   );
 }

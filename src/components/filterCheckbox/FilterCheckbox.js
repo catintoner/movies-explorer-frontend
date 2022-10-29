@@ -2,13 +2,14 @@ import React from 'react';
 
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox(props) {
   return (
     <div className='checkbox__filter'>
       <input
         className='checkbox__toggle'
         type='checkbox'
         id='toggle-button'
+        onChange={props.searchWithShorty}
       >
       </input>
       <label

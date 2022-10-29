@@ -37,7 +37,6 @@ function Profile(props) {
 
   function onSubmit(evt) {
     evt.preventDefault();
-    console.log(values);
     props.handleUpdateUserInfo(values);
     setInfoEdit(false);
   }

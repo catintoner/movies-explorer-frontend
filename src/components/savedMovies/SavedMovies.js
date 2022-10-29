@@ -9,6 +9,10 @@ import './SavedMovies.css';
 
 function SavedMovies(props) {
 
+  React.useEffect(() => {
+    props.getSavedMovies();
+  },[]);
+
   return (
 
     <>

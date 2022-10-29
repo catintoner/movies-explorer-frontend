@@ -33,6 +33,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({ name: '', email: '' });
   const [popupOpen, setPopupState] = React.useState(false);
 
+  const [savedMovies, setSavedMovies] = React.useState([]);
+
   React.useEffect(() => {
     handleCheckToken();
   }, []);
@@ -43,16 +45,17 @@ function App() {
         .then((userInfo) => {
           localStorage.setItem('userInfo', JSON.stringify(userInfo));
           setCurrentUser(JSON.parse(localStorage.getItem('userInfo')));
-          console.log(currentUser);
         })
         .catch((err) => {
           console.log(err);
         })
+
+        getSavedMovies();
     }
   }, [loggedIn]);
 
   function handleCheckToken() {
-    const userId = localStorage.getItem('user');
+    const userId = localStorage.getItem('userInfo');
 
     if (userId && userId !== null) {
       return auth.checkToken(userId)
@@ -95,7 +98,9 @@ function App() {
   function handleLogout() {
     auth.logoutUser()
       .then(() => {
-        localStorage.removeItem("user");
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('movies');
+        localStorage.removeItem('keyWord');
         setLoggedIn(false);
       })
 
@@ -116,6 +121,32 @@ function App() {
       })
   }
 
+  function handleLikeClick({ film }) {
+    console.log()
+    mainApi.addMovie(film)
+      .then((addedFilm) => {
+        setSavedMovies([...savedMovies, addedFilm]);
+        console.log(addedFilm);
+        console.log(savedMovies)
+      })
+  }
+
+  function handleDeleteClick({ film }) {
+    let movie = savedMovies.find(movie => movie.id === film.movieId);
+    let movieId = movie._id;
+    mainApi.deleteMovie(movieId)
+      .then((res) => {
+        setSavedMovies(savedMovies.filter(item => item._id !== movieId));
+        console.log(res);
+      })
+  }
+
+  function getSavedMovies() {
+    mainApi.getMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -135,12 +166,17 @@ function App() {
               path='/movies'
               component={Movies}
               loggedIn={loggedIn}
-              likeBtnClassName='card__btn-like_status_active'>
+              savedMovies={savedMovies}
+              likeBtnClassName='card__btn-like_status_active'
+              handleLikeClick={handleLikeClick}
+              handleDeleteClick={handleDeleteClick}
+              >
             </ProtectedRoute>
 
             <ProtectedRoute
               exact
               path='/saved-movies'
+              getSavedMovies={getSavedMovies}
               component={SavedMovies}
               loggedIn={loggedIn}
               likeBtnClassName='card__btn-like_status_delete'>

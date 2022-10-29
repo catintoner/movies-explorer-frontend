@@ -44,7 +44,6 @@
 
 .preloader {
   display: none;
-  /* display: flex; */
   align-items: center;
   justify-content: center;
   max-width: calc(100% - 70px*2);
@@ -52,6 +51,10 @@
   height: 100%;
   z-index: 10;
   padding: 20px;
+}
+
+.preloader_type_active {
+  display: flex;
 }
 
 .preloader__container {
