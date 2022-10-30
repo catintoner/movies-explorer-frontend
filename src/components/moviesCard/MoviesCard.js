@@ -7,7 +7,7 @@ function MoviesCard(props) {
   const [btnLikeStatus, setBtnLikeStatus] = React.useState(false);
 
   React.useEffect(() => {
-    let likedMovie = props.savedMovies.find(movie => movie.movieId === props.film.id)
+    let likedMovie = props.savedMovies.find(movie => movie.movieId === props.film.id || movie.movieId === props.film.movieId)
     if (likedMovie) {
       setBtnLikeStatus(true);
     }
@@ -24,9 +24,20 @@ function MoviesCard(props) {
     }
   }
 
+  function editUrlForImg(picture) {
+    const startUrl = 'https://api.nomoreparties.co/';
+    if (picture.includes(startUrl)) {
+      return picture;
+    } else {
+      return (
+        picture = startUrl + picture
+      );
+    }
+  }
+
   return (
     <article className='card'>
-      <img className='card__photo' src={` https://api.nomoreparties.co/${props.picture}`} alt='Кадр из фильма' />
+      <img className='card__photo' src={editUrlForImg(props.picture)} alt='Кадр из фильма' />
       <div className='card__info'>
         <h4 className='card__title'>
           {props.nameRU}

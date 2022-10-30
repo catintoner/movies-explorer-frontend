@@ -6,12 +6,13 @@ class MainApi {
     this._headers = options.headers;
   }
 
-  _checkResponse(res) {
+  async _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
 
-    return Promise.reject(`Ошибка: ${res.status}`);
+    const result = await res.json();
+    return Promise.reject(result.message);
   }
 
   getUserInfo() {
@@ -34,7 +35,7 @@ class MainApi {
 
   getMovies() {
     return fetch(`${this._baseUrl}/movies`, { headers: this._headers, credentials: 'include' })
-    .then(this._checkResponse)
+      .then(this._checkResponse)
   }
 
   addMovie(film) {
@@ -48,9 +49,9 @@ class MainApi {
         duration: film.duration,
         year: film.year,
         description: film.description,
-        image: `https://api.nomoreparties.co/${film.image.url}`,
+        image: `https://api.nomoreparties.co${film.image.url}`,
         trailerLink: film.trailerLink,
-        thumbnail: `https://api.nomoreparties.co/${film.image.formats.thumbnail.url}`,
+        thumbnail: `https://api.nomoreparties.co${film.image.formats.thumbnail.url}`,
         movieId: film.id,
         nameRU: film.nameRU,
         nameEN: film.nameEN,

@@ -5,7 +5,8 @@ import Header from '../header/Header';
 import './Profile.css';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-
+import { mainApi } from '../../utils/MainApi';
+import { auth } from '../../utils/Auth';
 
 function Profile(props) {
 
@@ -13,7 +14,9 @@ function Profile(props) {
 
   const [infoEdit, setInfoEdit] = React.useState(false);
 
-  const [values, setValues] = React.useState({});
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  const [values, setValues] = React.useState(currentUser);
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
 
@@ -26,6 +29,32 @@ function Profile(props) {
     }
   }
 
+  function handleUpdateUserInfo(name, email) {
+    mainApi.updateUserInfo(name, email)
+      .then((modifiedUserInfo) => {
+        props.setCurrentUser(modifiedUserInfo);
+        props.setPopupState(true);
+        setErrorMessage('');
+      })
+
+      .catch((message) => {
+        setErrorMessage(message);
+      })
+  }
+
+  function handleLogout() {
+    auth.logoutUser()
+      .then(() => {
+        localStorage.clear();
+        props.setLoggedIn(false);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+
   function handleInputChange(evt) {
     const target = evt.target;
     const name = target.name;
@@ -37,7 +66,7 @@ function Profile(props) {
 
   function onSubmit(evt) {
     evt.preventDefault();
-    props.handleUpdateUserInfo(values);
+    handleUpdateUserInfo(values);
     setInfoEdit(false);
   }
 
@@ -108,6 +137,9 @@ function Profile(props) {
               {errors.email}
             </span>
           </div>
+          <p className='form__error'>
+            {errorMessage}
+          </p>
           <input
             className={`form__submit ${infoEdit && 'form__submit_type_active'} ${(!isValid && infoEdit) && 'form__submit_type_disabled'}`}
             type={!infoEdit ? 'button' : 'submit'}
@@ -121,7 +153,7 @@ function Profile(props) {
           type='button'
           className='profile__exit-btn'
           hidden={infoEdit}
-          onClick={props.handleLogout}
+          onClick={handleLogout}
         >
           Выйти из профиля
         </button>

@@ -3,7 +3,29 @@ import SignForm from '../signForm/SignForm';
 
 import './Login.css';
 
+import { auth } from '../../utils/Auth';
+import { useHistory } from 'react-router-dom';
+
 function Login(props) {
+
+  const history = useHistory();
+
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  function handleLoginSubmit(email, password) {
+    auth.loginUser(email, password)
+      .then((userId) => {
+        console.log(userId);
+        localStorage.setItem('userId', userId);
+        props.setLoggedIn(true);
+        history.push('/movies');
+      })
+
+      .catch((message) => {
+        setErrorMessage(message);
+      })
+  }
+
   return (
     <SignForm
       title='Рады видеть!'
@@ -12,7 +34,8 @@ function Login(props) {
       quoteFooter='Еще не зарегистрированы?'
       footerLink='/sign-up'
       footerLinkName='Регистрация'
-      onSubmit={props.onSubmit}
+      onSubmit={handleLoginSubmit}
+      errorMessage={errorMessage}
     />
   );
 }

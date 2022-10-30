@@ -31,9 +31,15 @@ function App() {
 
   const [loggedIn, setLoggedIn] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({ name: '', email: '' });
+
   const [popupOpen, setPopupState] = React.useState(false);
 
+  const [movies, setMovies] = React.useState([]);
+
   const [savedMovies, setSavedMovies] = React.useState([]);
+
+  const [isChecked, setIsChecked] = React.useState(false);
+
 
   React.useEffect(() => {
     handleCheckToken();
@@ -50,12 +56,13 @@ function App() {
           console.log(err);
         })
 
-        getSavedMovies();
+      getSavedMovies();
+
     }
   }, [loggedIn]);
 
   function handleCheckToken() {
-    const userId = localStorage.getItem('userInfo');
+    const userId = localStorage.getItem('userId');
 
     if (userId && userId !== null) {
       return auth.checkToken(userId)
@@ -72,71 +79,23 @@ function App() {
     }
   }
 
-  function handleRegistrationSubmit(email, password, name) {
-    auth.createUser(email, password, name)
-      .then(() => {
-        history.push('/sign-in');
-      })
-
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function handleLoginSubmit(email, password) {
-    auth.loginUser(email, password)
-      .then(() => {
-        setLoggedIn(true);
-        history.push('/movies');
-      })
-
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function handleLogout() {
-    auth.logoutUser()
-      .then(() => {
-        localStorage.removeItem('userInfo');
-        localStorage.removeItem('movies');
-        localStorage.removeItem('keyWord');
-        setLoggedIn(false);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function handleUpdateUserInfo(name, email) {
-    mainApi.updateUserInfo(name, email)
-      .then((modifiedUserInfo) => {
-        setCurrentUser(modifiedUserInfo);
-        setPopupState(true);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
   function handleLikeClick({ film }) {
-    console.log()
+    console.log(film)
     mainApi.addMovie(film)
       .then((addedFilm) => {
         setSavedMovies([...savedMovies, addedFilm]);
-        console.log(addedFilm);
-        console.log(savedMovies)
+        localStorage.setItem('help', JSON.stringify(savedMovies));
       })
   }
 
   function handleDeleteClick({ film }) {
-    let movie = savedMovies.find(movie => movie.id === film.movieId);
+    console.log(film);
+    let movie = savedMovies.find(movie => movie._id === film._id);
     let movieId = movie._id;
     mainApi.deleteMovie(movieId)
       .then((res) => {
         setSavedMovies(savedMovies.filter(item => item._id !== movieId));
+        localStorage.setItem('help', JSON.stringify(savedMovies));
         console.log(res);
       })
   }
@@ -145,8 +104,13 @@ function App() {
     mainApi.getMovies()
       .then((movies) => {
         setSavedMovies(movies);
+        console.log(savedMovies);
       })
   }
+
+  React.useEffect(() => {
+    console.log(savedMovies);
+  }, [savedMovies])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -166,20 +130,29 @@ function App() {
               path='/movies'
               component={Movies}
               loggedIn={loggedIn}
+              movies={movies}
+              setMovies={setMovies}
               savedMovies={savedMovies}
               likeBtnClassName='card__btn-like_status_active'
               handleLikeClick={handleLikeClick}
               handleDeleteClick={handleDeleteClick}
-              >
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
+            >
             </ProtectedRoute>
 
             <ProtectedRoute
               exact
               path='/saved-movies'
+              savedMovies={savedMovies}
               getSavedMovies={getSavedMovies}
               component={SavedMovies}
               loggedIn={loggedIn}
-              likeBtnClassName='card__btn-like_status_delete'>
+              likeBtnClassName='card__btn-like_status_delete'
+              isChecked={isChecked}
+              setIsChecked={setIsChecked}
+              handleDeleteClick={handleDeleteClick}
+            >
             </ProtectedRoute>
 
             <ProtectedRoute
@@ -187,19 +160,19 @@ function App() {
               path='/profile'
               component={Profile}
               loggedIn={loggedIn}
-              handleLogout={handleLogout}
-              handleUpdateUserInfo={handleUpdateUserInfo}
+              setLoggedIn={setLoggedIn}
+              setCurrentUser={setCurrentUser}
+              setPopupState={setPopupState}
             >
             </ProtectedRoute>
 
             <Route exact path='/sign-up'>
               <Register
-                onSubmit={handleRegistrationSubmit}
               />
             </Route>
             <Route exact path='/sign-in'>
               <Login
-                onSubmit={handleLoginSubmit}
+              setLoggedIn={setLoggedIn}
               />
             </Route>
             <Route path='*'>
@@ -210,8 +183,8 @@ function App() {
           </Switch>
 
           <PopupSuccess
-          popupOpen={popupOpen}
-          setPopupState={setPopupState}
+            popupOpen={popupOpen}
+            setPopupState={setPopupState}
           />
         </div>
       </div>

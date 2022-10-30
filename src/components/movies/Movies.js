@@ -20,27 +20,12 @@ function Movies(props) {
 
   const [isSearched, setIsSearched] = React.useState(localStorage.getItem('movies') ? true : false);
 
-  const [movies, setMovies] = React.useState([]);
-
   const [isFinding, setIsFinding] = React.useState(false);
 
   const [keyWord, setKeyWord] = React.useState('');
 
-  const [isShortDisabled, setIsShortDisabled] = React.useState(true);
-
   function handleKeyWord(evt) {
     setKeyWord(evt.target.value);
-  }
-
-  function handleShortyClick() {
-    if (isShortDisabled) {
-      setIsShortDisabled(false);
-      localStorage.setItem('short', JSON.stringify(isShortDisabled));
-    } else {
-      setIsShortDisabled(true);
-      localStorage.setItem('short', JSON.stringify(isShortDisabled));
-    }
-
   }
 
   function filteringMovies(keyWord) {
@@ -50,7 +35,7 @@ function Movies(props) {
 
     localStorage.setItem('keyWord', keyWord);
     setKeyWord('');
-    setMovies(moviesFilter);
+    props.setMovies(moviesFilter);
   }
 
   function searchMovies() {
@@ -75,7 +60,6 @@ function Movies(props) {
   }
 
   function handleSearchMoviesWithShorty() {
-    handleShortyClick();
     searchMovies();
   }
 
@@ -92,13 +76,15 @@ function Movies(props) {
           handleKeyWord={handleKeyWord}
           searchWithShorty={handleSearchMoviesWithShorty}
           keyWord={keyWord}
-          checked={isShortDisabled}
+          // checked={isShortDisabled}
+          isChecked={props.isChecked}
+          setIsChecked={props.setIsChecked}
         />
         <Preloader
           isFinding={isFinding}
         />
         <MoviesCardList
-          movies={movies}
+          movies={props.movies}
           savedMovies={props.savedMovies}
           likeBtnClassName={props.likeBtnClassName}
           handleLikeClick={props.handleLikeClick}

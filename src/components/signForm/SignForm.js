@@ -83,6 +83,9 @@ function SignForm(props) {
           <span className={`sign-form__error ${props.lastInputErrorClass} ${!errors.password && 'sign-form__error_type_hidden'}`}>
             {errors.password}
           </span>
+          <p className='sign-form__error sign-form__error_type_server'>
+            {props.errorMessage}
+          </p>
           <input
             className={`sign-form__submit ${(!isValid && !props.validName) ? 'sign-form__submit_type_disabled' : ''}`}
             type='submit'

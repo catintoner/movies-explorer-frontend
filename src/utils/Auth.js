@@ -6,12 +6,12 @@ class Auth {
     this._headers = options.headers;
   }
 
-  _checkResponse(res) {
+  async _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
-
-    return Promise.reject(`Ошибка: ${res.status}`);
+     const result = await res.json();
+     return Promise.reject(result.message);
   }
 
   createUser(email, password, name) {
@@ -22,10 +22,6 @@ class Auth {
       credentials: 'include'
     })
       .then(this._checkResponse)
-
-      .then((res) => {
-        return res;
-      })
   }
 
   loginUser(email, password) {

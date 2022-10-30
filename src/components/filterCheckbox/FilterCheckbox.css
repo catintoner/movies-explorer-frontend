@@ -20,7 +20,7 @@
   transition: .5s;
 }
 
-.checkbox__toggle::before {
+.checkbox__toggle::after {
   content: '';
   display: inline-block;
   position: absolute;
@@ -35,7 +35,7 @@
   transition: .5s;
 }
 
-.checkbox__toggle:checked::before {
+.checkbox__toggle:checked::after {
   transform: translateX(100%);
   background-color: #fff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);

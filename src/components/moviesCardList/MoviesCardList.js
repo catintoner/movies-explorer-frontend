@@ -11,6 +11,7 @@ function MoviesCardList({
   handleLikeClick,
   handleDeleteClick,
   savedMovies,
+  isSearched,
 }) {
 
   const location = useLocation();
@@ -20,8 +21,17 @@ function MoviesCardList({
   React.useEffect(() => {
     if (location.pathname === '/movies') {
       setMoviesForRender(movies);
+      console.log(movies);
     }
-  }, [movies, location.pathname]);
+
+    if (location.pathname === '/saved-movies') {
+      if (isSearched) {
+        setMoviesForRender(movies);
+      } else {
+        setMoviesForRender(savedMovies);
+      }
+    }
+  }, [movies, location.path, savedMovies]);
 
   return (
     <section className='cardList__container'>
@@ -29,12 +39,12 @@ function MoviesCardList({
         return (
           <MoviesCard
             film={film}
-            key={film.id}
+            key={film.id ? film.id : film.movieId}
             likeBtnClassName={likeBtnClassName}
             handleLikeClick={handleLikeClick}
             handleDeleteClick={handleDeleteClick}
             savedMovies={savedMovies}
-            picture={film.image.url}
+            picture={film.image.url ? film.image.url : film.image}
             nameRU={film.nameRU}
             duration={film.duration}
           />

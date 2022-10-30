@@ -4,8 +4,26 @@ import SignForm from '../signForm/SignForm';
 
 import './Register.css';
 
+import { auth } from '../../utils/Auth';
+import { useHistory } from 'react-router-dom';
 
 function Register(props) {
+
+  const history = useHistory();
+
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+
+  function handleRegistrationSubmit(email, password, name) {
+    auth.createUser(email, password, name)
+      .then(() => {
+        history.push('/sign-in');
+      })
+
+      .catch((message) => {
+        setErrorMessage(message);
+      })
+  }
 
   const [name, setName] = React.useState('');
 
@@ -29,9 +47,10 @@ function Register(props) {
       quoteFooter='Уже зарегистрированы?'
       footerLink='/sign-in'
       footerLinkName='Войти'
-      onSubmit={props.onSubmit}
+      onSubmit={handleRegistrationSubmit}
       name={name}
       validName={isValidName}
+      errorMessage={errorMessage}
     >
       <label
         htmlFor='sign-name'
