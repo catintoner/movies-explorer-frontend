@@ -24,11 +24,6 @@ function App() {
 
   const history = useHistory();
 
-  function handleReturnBack() {
-    history.goBack();
-  }
-
-
   const [loggedIn, setLoggedIn] = React.useState(null);
   const [currentUser, setCurrentUser] = React.useState({ name: '', email: '' });
 
@@ -40,23 +35,27 @@ function App() {
 
   React.useEffect(() => {
     handleCheckToken();
-  }, []);
-
-  React.useEffect(() => {
     if (loggedIn) {
-      mainApi.getUserInfo()
-        .then((userInfo) => {
-          localStorage.setItem('userInfo', JSON.stringify(userInfo));
+      Promise.all([
+        mainApi.getUserInfo(),
+        mainApi.getMovies()
+      ])
+
+        .then(([userInfo, movies]) => {
           setCurrentUser(JSON.parse(localStorage.getItem('userInfo')));
+          setSavedMovies(movies);
+          localStorage.setItem('userInfo', JSON.stringify(userInfo));
         })
+
         .catch((err) => {
           console.log(err);
         })
-
-      getSavedMovies();
-
     }
   }, [loggedIn]);
+
+  function handleReturnBack() {
+    history.goBack();
+  }
 
   function handleCheckToken() {
     const userId = localStorage.getItem('userId');
@@ -74,13 +73,6 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-  }
-
-  function getSavedMovies() {
-    mainApi.getMovies()
-      .then((movies) => {
-        setSavedMovies(movies);
-      })
   }
 
   return (
@@ -115,7 +107,6 @@ function App() {
               movies={savedMovies}
               savedMovies={savedMovies}
               setSavedMovies={setSavedMovies}
-              getSavedMovies={getSavedMovies}
               component={SavedMovies}
               loggedIn={loggedIn}
               likeBtnClassName='card__btn-like_status_delete'
@@ -139,7 +130,7 @@ function App() {
             </Route>
             <Route exact path='/sign-in'>
               <Login
-              setLoggedIn={setLoggedIn}
+                setLoggedIn={setLoggedIn}
               />
             </Route>
             <Route path='*'>

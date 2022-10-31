@@ -100,7 +100,6 @@ function Movies(props) {
   }
 
   function getLoadInfo() {
-    console.log('size');
     const { innerWidth } = window;
     if (innerWidth >= 1280) {
       setLoadInfo(LOADINFO.max);

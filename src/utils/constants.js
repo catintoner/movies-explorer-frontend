@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://backend.catintonersDiplom.nomorepartiesxyz.ru';
 const moviesUrl = 'https://api.nomoreparties.co/beatfilm-movies';
 
 //https://backend.catintonersDiplom.nomoredomains.club

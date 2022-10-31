@@ -25,7 +25,6 @@ function SavedMovies(props) {
 
   function handleClickCheck() {
     setIsChecked((state) => {
-      console.log(state);
       return !state;
     });
   }

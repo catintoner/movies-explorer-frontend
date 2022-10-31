@@ -10,8 +10,8 @@ class Auth {
     if (res.ok) {
       return res.json();
     }
-     const result = await res.json();
-     return Promise.reject(result.message);
+    const result = await res.json();
+    return Promise.reject(result.message);
   }
 
   createUser(email, password, name) {
@@ -48,7 +48,7 @@ class Auth {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${userId}`
+        'Authorization': userId
       },
       credentials: 'include'
     })
