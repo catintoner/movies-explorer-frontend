@@ -3,7 +3,6 @@ import React from 'react';
 import './MoviesCardList.css';
 
 import MoviesCard from '../moviesCard/MoviesCard';
-import { useLocation } from 'react-router-dom';
 
 function MoviesCardList({
   movies,
@@ -11,40 +10,23 @@ function MoviesCardList({
   handleLikeClick,
   handleDeleteClick,
   savedMovies,
-  isSearched,
 }) {
-
-  const location = useLocation();
-
-  const [moviesForRender, setMoviesForRender] = React.useState([]);
-
-  React.useEffect(() => {
-    if (location.pathname === '/movies') {
-      setMoviesForRender(movies);
-      console.log(movies);
-    }
-
-    if (location.pathname === '/saved-movies') {
-      if (isSearched) {
-        setMoviesForRender(movies);
-      } else {
-        setMoviesForRender(savedMovies);
-      }
-    }
-  }, [movies, location.path, savedMovies]);
 
   return (
     <section className='cardList__container'>
-      {moviesForRender.length > 0 ? moviesForRender.map((film) => {
+      {movies.length > 0 ? movies.map((film) => {
         return (
           <MoviesCard
             film={film}
             key={film.id ? film.id : film.movieId}
+            _id = {film._id ? film._id : film.id}
+            movieId={film.id ? film.id : film.movieId}
             likeBtnClassName={likeBtnClassName}
             handleLikeClick={handleLikeClick}
             handleDeleteClick={handleDeleteClick}
             savedMovies={savedMovies}
             picture={film.image.url ? film.image.url : film.image}
+            link={film.trailerLink}
             nameRU={film.nameRU}
             duration={film.duration}
           />

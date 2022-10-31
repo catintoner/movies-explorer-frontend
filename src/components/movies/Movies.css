@@ -20,6 +20,10 @@
   transition: .2s;
 }
 
+.movies__btn-more_type_hidden {
+  display: none;
+}
+
 .movies__btn-more:hover {
   opacity: .8;
 }

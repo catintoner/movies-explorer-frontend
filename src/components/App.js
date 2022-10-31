@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch, withRouter, useHistory } from 'react-router-dom';  //Route, Switch, useHistory,
+import { Route, Switch, withRouter, useHistory } from 'react-router-dom';
 
 import { auth } from '../utils/Auth';
 import { mainApi } from '../utils/MainApi';
@@ -37,9 +37,6 @@ function App() {
   const [movies, setMovies] = React.useState([]);
 
   const [savedMovies, setSavedMovies] = React.useState([]);
-
-  const [isChecked, setIsChecked] = React.useState(false);
-
 
   React.useEffect(() => {
     handleCheckToken();
@@ -79,38 +76,12 @@ function App() {
     }
   }
 
-  function handleLikeClick({ film }) {
-    console.log(film)
-    mainApi.addMovie(film)
-      .then((addedFilm) => {
-        setSavedMovies([...savedMovies, addedFilm]);
-        localStorage.setItem('help', JSON.stringify(savedMovies));
-      })
-  }
-
-  function handleDeleteClick({ film }) {
-    console.log(film);
-    let movie = savedMovies.find(movie => movie._id === film._id);
-    let movieId = movie._id;
-    mainApi.deleteMovie(movieId)
-      .then((res) => {
-        setSavedMovies(savedMovies.filter(item => item._id !== movieId));
-        localStorage.setItem('help', JSON.stringify(savedMovies));
-        console.log(res);
-      })
-  }
-
   function getSavedMovies() {
     mainApi.getMovies()
       .then((movies) => {
         setSavedMovies(movies);
-        console.log(savedMovies);
       })
   }
-
-  React.useEffect(() => {
-    console.log(savedMovies);
-  }, [savedMovies])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -132,26 +103,22 @@ function App() {
               loggedIn={loggedIn}
               movies={movies}
               setMovies={setMovies}
+              setSavedMovies={setSavedMovies}
               savedMovies={savedMovies}
               likeBtnClassName='card__btn-like_status_active'
-              handleLikeClick={handleLikeClick}
-              handleDeleteClick={handleDeleteClick}
-              isChecked={isChecked}
-              setIsChecked={setIsChecked}
             >
             </ProtectedRoute>
 
             <ProtectedRoute
               exact
               path='/saved-movies'
+              movies={savedMovies}
               savedMovies={savedMovies}
+              setSavedMovies={setSavedMovies}
               getSavedMovies={getSavedMovies}
               component={SavedMovies}
               loggedIn={loggedIn}
               likeBtnClassName='card__btn-like_status_delete'
-              isChecked={isChecked}
-              setIsChecked={setIsChecked}
-              handleDeleteClick={handleDeleteClick}
             >
             </ProtectedRoute>
 

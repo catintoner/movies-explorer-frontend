@@ -36,6 +36,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  text-decoration: none;
+  color: black;
+  transition: .2s;
+}
+
+.card__title:hover {
+  opacity: .7;
 }
 
 .card__time-duration {

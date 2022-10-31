@@ -34,10 +34,9 @@ function SearchForm(props) {
           </input>
         </div>
         <FilterCheckbox
-          searchWithShorty={props.searchWithShorty}
-          checked={props.checked}
           isChecked={props.isChecked}
-          setIsChecked={props.setIsChecked}
+
+          handleClickCheck={props.handleClickCheck}
         />
       </form>
     </div>

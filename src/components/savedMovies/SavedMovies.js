@@ -7,28 +7,36 @@ import SearchForm from '../searchForm/SearchForm';
 
 import './SavedMovies.css';
 
+import { mainApi } from '../../utils/MainApi';
+
 function SavedMovies(props) {
 
-  const [isSearched, setIsSearched] = React.useState(false);
-
-  const [movies, setMovies] = React.useState([]);
+  const [movies, setMovies] = React.useState(props.savedMovies);
 
   const [isFinding, setIsFinding] = React.useState(false);
 
   const [keyWord, setKeyWord] = React.useState('');
 
+  const [isChecked, setIsChecked] = React.useState(false);
+
   function handleKeyWord(evt) {
     setKeyWord(evt.target.value);
   }
 
+  function handleClickCheck() {
+    setIsChecked((state) => {
+      console.log(state);
+      return !state;
+    });
+  }
+
   function filteringMovies(keyWord) {
     const shortTime = 40;
-
-    const moviesFilter = props.savedMovies.filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase()) && (JSON.parse(localStorage.getItem('short')) ? film.duration <= shortTime : ' ')));
+    const filtredMovies = props.savedMovies.filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase()) && (isChecked ? film.duration <= shortTime : true)));
 
     localStorage.setItem('keyWord', keyWord);
     setKeyWord('');
-    setMovies(moviesFilter);
+    setMovies(filtredMovies);
   }
 
   function searchMovies() {
@@ -40,13 +48,30 @@ function SavedMovies(props) {
   function handleSearchMovies(evt) {
     evt.preventDefault();
     searchMovies();
-    setIsSearched(true);
   }
 
   function handleSearchMoviesWithShorty() {
     searchMovies();
-    setIsSearched(true);
   }
+
+  function onDeleteClick(newListFilms) {
+    props.setSavedMovies(newListFilms);
+    setMovies(newListFilms);
+  }
+
+  function handleDeleteClick(film) {
+    const movieId = film._id;
+    mainApi.deleteMovie(movieId)
+      .then(() => {
+        onDeleteClick((state) => {
+          return state.filter(item => item._id !== movieId);
+        })
+      })
+  }
+
+  React.useEffect(() => {
+    searchMovies();
+  }, [isChecked])
 
   return (
 
@@ -62,18 +87,17 @@ function SavedMovies(props) {
           handleKeyWord={handleKeyWord}
           searchWithShorty={handleSearchMoviesWithShorty}
           keyWord={keyWord}
-          isChecked={props.isChecked}
-          setIsChecked={props.setIsChecked}
+          isChecked={isChecked}
+          handleClickCheck={handleClickCheck}
         />
         <Preloader
           isFinding={isFinding}
         />
         <MoviesCardList
-          isSearched={isSearched}
           movies={movies}
           savedMovies={props.savedMovies}
           likeBtnClassName={props.likeBtnClassName}
-          handleDeleteClick={props.handleDeleteClick}
+          handleDeleteClick={handleDeleteClick}
         />
       </main>
       <footer>

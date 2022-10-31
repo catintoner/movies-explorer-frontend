@@ -15,7 +15,6 @@ function Login(props) {
   function handleLoginSubmit(email, password) {
     auth.loginUser(email, password)
       .then((userId) => {
-        console.log(userId);
         localStorage.setItem('userId', userId);
         props.setLoggedIn(true);
         history.push('/movies');

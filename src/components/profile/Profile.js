@@ -29,17 +29,25 @@ function Profile(props) {
     }
   }
 
-  function handleUpdateUserInfo(name, email) {
-    mainApi.updateUserInfo(name, email)
-      .then((modifiedUserInfo) => {
-        props.setCurrentUser(modifiedUserInfo);
-        props.setPopupState(true);
-        setErrorMessage('');
+  function handleUpdateUserInfo(userInfo) {
+    if (userInfo.name !== currentUser.name || userInfo.email !== currentUser.email) {
+      mainApi.updateUserInfo({
+        name: userInfo.name,
+        email: userInfo.email,
       })
+        .then((modifiedUserInfo) => {
+          props.setCurrentUser(modifiedUserInfo);
+          props.setPopupState(true);
+          setErrorMessage('');
+        })
 
-      .catch((message) => {
-        setErrorMessage(message);
-      })
+        .catch((message) => {
+          setErrorMessage(message);
+        })
+    } else {
+      setErrorMessage('Введенные данные совпадают с текущими');
+    }
+
   }
 
   function handleLogout() {
@@ -53,7 +61,6 @@ function Profile(props) {
         console.log(err);
       })
   }
-
 
   function handleInputChange(evt) {
     const target = evt.target;

@@ -7,7 +7,7 @@ function MoviesCard(props) {
   const [btnLikeStatus, setBtnLikeStatus] = React.useState(false);
 
   React.useEffect(() => {
-    let likedMovie = props.savedMovies.find(movie => movie.movieId === props.film.id || movie.movieId === props.film.movieId)
+    const likedMovie = props.savedMovies.find(movie => movie.movieId === props.movieId)
     if (likedMovie) {
       setBtnLikeStatus(true);
     }
@@ -39,9 +39,9 @@ function MoviesCard(props) {
     <article className='card'>
       <img className='card__photo' src={editUrlForImg(props.picture)} alt='Кадр из фильма' />
       <div className='card__info'>
-        <h4 className='card__title'>
+        <a className='card__title' href={props.link} alt='Ссылка на фильм' target='_blank' rel="noreferrer">
           {props.nameRU}
-        </h4>
+        </a>
         <p className='card__time-duration'>
           {`${Math.floor(props.duration / 60)}ч ${props.duration % 60}мин`}
         </p>
