@@ -9,6 +9,8 @@ import './SavedMovies.css';
 
 import { mainApi } from '../../utils/MainApi';
 
+import { auth } from '../../utils/Auth';
+
 function SavedMovies(props) {
 
   const [movies, setMovies] = React.useState(props.savedMovies);
@@ -62,6 +64,16 @@ function SavedMovies(props) {
         onDeleteClick((state) => {
           return state.filter(item => item._id !== movieId);
         })
+      })
+
+      .catch((err) => {
+        if (err === 'Необходима авторизация') {
+          auth.logoutUser()
+            .then(() => {
+              localStorage.clear();
+              props.setLoggedIn(false);
+            })
+        }
       })
   }
 
