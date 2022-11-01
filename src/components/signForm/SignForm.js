@@ -61,6 +61,7 @@ function SignForm(props) {
             pattern='^((([0-9A-Za-z]{1}[-0-9A-z\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$'
             required
             placeholder='example@email.com'
+            disabled={props.isPending}
           >
           </input>
           <span className={`sign-form__error ${!errors.email && 'sign-form__error_type_hidden'}`}>
@@ -80,6 +81,7 @@ function SignForm(props) {
             autoComplete='off'
             onChange={handleInputChange}
             required
+            disabled={props.isPending}
           >
           </input>
           <span className={`sign-form__error ${props.lastInputErrorClass} ${!errors.password && 'sign-form__error_type_hidden'}`}>
@@ -89,10 +91,10 @@ function SignForm(props) {
             {props.errorMessage}
           </p>
           <input
-            className={`sign-form__submit ${(!isValid && !props.validName) ? 'sign-form__submit_type_disabled' : ''}`}
+            className={`sign-form__submit ${((!isValid && !props.validName) || props.isPending) ? 'sign-form__submit_type_disabled' : ''}`}
             type='submit'
             value={props.submitName}
-            disabled={(!isValid && !props.validName) && true}
+            disabled={((!isValid && !props.validName) || props.isPending) && true}
           >
           </input>
         </form>

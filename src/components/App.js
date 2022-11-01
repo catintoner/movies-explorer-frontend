@@ -35,6 +35,7 @@ function App() {
 
   React.useEffect(() => {
     handleCheckToken();
+
     if (loggedIn) {
       Promise.all([
         mainApi.getUserInfo(),
@@ -51,8 +52,7 @@ function App() {
           console.log(err);
         })
     }
-
-  }, [loggedIn]);
+  }, [loggedIn])
 
   function handleReturnBack() {
     history.goBack();
@@ -65,11 +65,11 @@ function App() {
       return auth.checkToken(userId)
         .then(() => {
           setLoggedIn(true);
-          history.push("/movies");
         })
 
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          setLoggedIn(false);
+          localStorage.clear();
         })
     } else {
       setLoggedIn(false);
@@ -101,6 +101,7 @@ function App() {
               setMovies={setMovies}
               setSavedMovies={setSavedMovies}
               savedMovies={savedMovies}
+              setLoggedIn={setLoggedIn}
               likeBtnClassName='card__btn-like_status_active'
             >
             </ProtectedRoute>
@@ -139,11 +140,12 @@ function App() {
               />
             </Route>
 
-            <Route exact path='*'>
+            <Route path='*'>
               <PageNotFound
                 handleReturnBack={handleReturnBack}
               />
             </Route>
+
           </Switch>
 
           <PopupSuccess

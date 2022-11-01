@@ -11,17 +11,21 @@ function Login(props) {
   const history = useHistory();
 
   const [errorMessage, setErrorMessage] = React.useState('');
+  const [isPending, setIsPending] = React.useState(false);
 
   function handleLoginSubmit(email, password) {
+    setIsPending(true);
     auth.loginUser(email, password)
       .then((userId) => {
         localStorage.setItem('userId', userId);
         props.setLoggedIn(true);
         history.push('/movies');
+        setIsPending(false);
       })
 
       .catch((message) => {
         setErrorMessage(message);
+        setIsPending(false);
       })
   }
 
@@ -35,6 +39,7 @@ function Login(props) {
       footerLinkName='Регистрация'
       onSubmit={handleLoginSubmit}
       errorMessage={errorMessage}
+      isPending={isPending}
     />
   );
 }

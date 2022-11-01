@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { withRouter } from 'react-router-dom';
 
@@ -15,7 +15,8 @@ import Footer from '../footer/Footer';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 
-import { AVERAGEWIDTH, LOADINFO, MAXWIDTH, SHORTTIME } from '../../utils/constants';
+import { LOADINFO, MAXWIDTH, SHORTTIME } from '../../utils/constants';
+import { auth } from '../../utils/Auth';
 
 
 
@@ -23,15 +24,17 @@ function Movies(props) {
 
   const [loadInfo, setLoadInfo] = React.useState({ start: 0, load: 0 });
 
-  const [renderedFilms, setRenderedFilms] = React.useState([]);
+  const [renderedFilms, setRenderedFilms] = React.useState(JSON.parse(localStorage.getItem('lastMovies')) || []);
 
   const [isFinding, setIsFinding] = React.useState(false);
 
-  const [keyWord, setKeyWord] = React.useState('');
+  const [keyWord, setKeyWord] = React.useState(localStorage.getItem('keyWord') || '');
 
   const [isChecked, setIsChecked] = React.useState(JSON.parse(localStorage.getItem('short')) || false);
 
-  const [moreFilms, setMoreFilms] = React.useState(false);
+  const [moreFilms, setMoreFilms] = React.useState(JSON.parse(localStorage.getItem('moreFilms')) || false);
+
+  const [windowSize, setWindowSize] = React.useState(getWindowSize());
 
   function handleKeyWord(evt) {
     setKeyWord(evt.target.value);
@@ -40,13 +43,22 @@ function Movies(props) {
   function handleClickCheck() {
     localStorage.setItem('short', JSON.stringify(!isChecked));
     setIsChecked(!isChecked);
-    searchMovies();
+    searchMovies(false);
   }
 
   function handleLikeClick({ film }) {
     mainApi.addMovie(film)
       .then((addedFilm) => {
         props.setSavedMovies([...props.savedMovies, addedFilm]);
+      })
+      .catch((err) => {
+        if (err === 'Необходима авторизация') {
+          auth.logoutUser()
+            .then(() => {
+              localStorage.clear();
+              props.setLoggedIn(false);
+            })
+          }
       })
   }
 
@@ -57,6 +69,15 @@ function Movies(props) {
       .then(() => {
         props.setSavedMovies(props.savedMovies.filter(item => item._id !== movieId));
       })
+      .catch((err) => {
+        if (err === 'Необходима авторизация') {
+          auth.logoutUser()
+            .then(() => {
+              localStorage.clear();
+              props.setLoggedIn(false);
+            })
+        }
+      })
   }
 
   function filteringMovies(keyWord, pushNew) {
@@ -64,9 +85,7 @@ function Movies(props) {
     const filtredMovies = JSON.parse(localStorage.getItem('movies')).filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase())) && (JSON.parse(localStorage.getItem('short')) ? film.duration <= SHORTTIME : true));
 
     localStorage.setItem('keyWord', keyWord);
-    setKeyWord('');
     reloadFilms(filtredMovies, pushNew);
-    localStorage.setItem('lastMovies', JSON.stringify(filtredMovies));
   }
 
   function searchMovies(pushNew) {
@@ -80,7 +99,7 @@ function Movies(props) {
           setIsFinding(false);
         })
     } else {
-      filteringMovies(keyWord, pushNew);
+      filteringMovies(!pushNew ? keyWord : localStorage.getItem('keyWord') || '', pushNew);
       setIsFinding(false);
     }
   }
@@ -90,24 +109,35 @@ function Movies(props) {
     searchMovies();
   }
 
-  window.addEventListener('resize', () => onWindowResize());
-
-
-  function onWindowResize() {
-    setTimeout(() => {
-      getLoadInfo();
-    }, 500);
+  function getWindowSize() {
+    const { innerWidth } = window;
+    return innerWidth;
   }
 
-  function getLoadInfo() {
-    const { innerWidth } = window;
-    if (innerWidth >= MAXWIDTH) {
-      setLoadInfo(LOADINFO.max);
-    } else if (innerWidth >= AVERAGEWIDTH) {
-      setLoadInfo(LOADINFO.average);
-    } else {
-      setLoadInfo(LOADINFO.min);
+  React.useEffect(() => {
+
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+      getLoadInfo();
     }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+
+  }, [windowSize]);
+
+  function getLoadInfo() {
+    if (windowSize >= MAXWIDTH) {
+      setLoadInfo(LOADINFO.max);
+    } else {
+      setLoadInfo(LOADINFO.average);
+    }
+    //  else {
+    //   setLoadInfo(LOADINFO.min);
+    // }
   }
 
   let newFilms = [];
@@ -126,32 +156,19 @@ function Movies(props) {
     if (pushNew) {
       newFilms = renderedFilms.concat(newFilms);
     }
-    if (!(filtredMovies.length > newFilms.length)) {
-      setMoreFilms(false);
-      localStorage.setItem('moreFilms', JSON.stringify(moreFilms));
-    } else {
-      setMoreFilms(true);
-      localStorage.setItem('moreFilms', JSON.stringify(moreFilms));
-    }
+
+    const isMoreButtonVisible = filtredMovies.length > renderedFilms.length;
+    setMoreFilms(isMoreButtonVisible);
+    localStorage.setItem('moreFilms', JSON.stringify(isMoreButtonVisible));
     setRenderedFilms(newFilms);
-    props.setMovies(newFilms);
+    localStorage.setItem('lastMovies', JSON.stringify(newFilms));
   }
 
-  window.addEventListener('resize', getLoadInfo);
+
 
   React.useEffect(() => {
     getLoadInfo();
   }, []);
-
-  React.useEffect(() => {
-    if (props.movies.length && !renderedFilms.length && loadInfo.start) {
-      setRenderedFilms(props.movies);
-    }
-  }, [loadInfo]);
-
-  // React.useEffect(() => {
-  //   reloadFilms(props.movies);
-  // }, [loadInfo]);
 
   return (
     <>

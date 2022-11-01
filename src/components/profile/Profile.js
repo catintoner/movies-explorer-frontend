@@ -20,6 +20,8 @@ function Profile(props) {
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
 
+  const [isPending, setIsPending] = React.useState(false);
+
   function handleEditActivate(evt) {
     evt.preventDefault();
     if (!infoEdit) {
@@ -31,6 +33,7 @@ function Profile(props) {
 
   function handleUpdateUserInfo(userInfo) {
     if (userInfo.name !== currentUser.name || userInfo.email !== currentUser.email) {
+      setIsPending(true);
       setErrors({});
       mainApi.updateUserInfo({
         name: userInfo.name,
@@ -40,10 +43,12 @@ function Profile(props) {
           props.setCurrentUser(modifiedUserInfo);
           props.setPopupState(true);
           setErrorMessage('');
+          setIsPending(false);
         })
 
         .catch((message) => {
           setErrorMessage(message);
+          setIsPending(false);
         })
     } else {
       setErrorMessage('Введенные данные совпадают с текущими');
@@ -111,7 +116,7 @@ function Profile(props) {
               name='name'
               type='text'
               autoComplete='off'
-              disabled={!infoEdit}
+              disabled={(!infoEdit) || isPending}
               onChange={handleInputChange}
               required
               minLength={2}
@@ -137,7 +142,7 @@ function Profile(props) {
               name='email'
               defaultValue={currentUser.email}
               autoComplete='off'
-              disabled={!infoEdit}
+              disabled={(!infoEdit) || isPending}
               onChange={handleInputChange}
               required
               type='email'
@@ -158,7 +163,7 @@ function Profile(props) {
             type={!infoEdit ? 'button' : 'submit'}
             value='Редактировать'
             onClick={!infoEdit ? handleEditActivate : null}
-            disabled={!infoEdit ? false : (!isValid ? true : false)}
+            disabled={((!infoEdit) || isPending) ? false : (!isValid ? true : false)}
           >
           </input>
         </form>

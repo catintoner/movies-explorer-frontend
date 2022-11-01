@@ -32,9 +32,6 @@ function SavedMovies(props) {
   function filteringMovies(keyWord) {
     const shortTime = 40;
     const filtredMovies = props.savedMovies.filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase()) && (isChecked ? film.duration <= shortTime : true)));
-
-    localStorage.setItem('keyWord', keyWord);
-    setKeyWord('');
     setMovies(filtredMovies);
   }
 

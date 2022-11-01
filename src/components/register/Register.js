@@ -13,31 +13,35 @@ function Register(props) {
 
   const [errorMessage, setErrorMessage] = React.useState('');
 
+  const [name, setName] = React.useState('');
+  const [error, setError] = React.useState({});
+  const [isValidName, setIsValidName] = React.useState(false);
+
+  const [isPending, setIsPending] = React.useState(false);
 
   function handleRegistrationSubmit(email, password, name) {
+    setIsPending(true);
     auth.createUser(email, password, name)
       .then(() => {
         auth.loginUser(email, password)
-        .then((userId) => {
-          localStorage.setItem('userId', userId);
-          props.setLoggedIn(true);
-          history.push('/movies');
-        })
+          .then((userId) => {
+            localStorage.setItem('userId', userId);
+            props.setLoggedIn(true);
+            history.push('/movies');
+            setIsPending(false);
+          })
 
-        .catch((message) => {
-          setErrorMessage(message);
-        })
+          .catch((message) => {
+            setErrorMessage(message);
+            setIsPending(false);
+          })
       })
 
       .catch((message) => {
         setErrorMessage(message);
+        setIsPending(false);
       })
   }
-
-  const [name, setName] = React.useState('');
-
-  const [error, setError] = React.useState({});
-  const [isValidName, setIsValidName] = React.useState(false);
 
   function handleInputChange(evt) {
     const target = evt.target;
@@ -60,6 +64,7 @@ function Register(props) {
       name={name}
       validName={isValidName}
       errorMessage={errorMessage}
+      isPending={isPending}
     >
       <label
         htmlFor='sign-name'
@@ -77,6 +82,7 @@ function Register(props) {
         required
         minLength={2}
         maxLength={30}
+        disabled={isPending}
       >
       </input>
       <span className={`sign-form__error ${!error.name && 'sign-form__error_type_hidden'}`}>
