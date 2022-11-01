@@ -2,7 +2,6 @@
 https://api.catintonersdiplom.nomoredomains.club/
 
 # Ссылка на pullRequest
-
 https://github.com/catintoner/movies-explorer-frontend/pull/20
 
 # movies-explorer-frontend
