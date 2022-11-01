@@ -37,9 +37,11 @@ function MoviesCard(props) {
 
   return (
     <article className='card'>
-      <img className='card__photo' src={editUrlForImg(props.picture)} alt='Кадр из фильма' />
+      <a className='card__link'  href={props.link} alt='Ссылка на фильм' target='_blank' rel='noreferrer'>
+        <img className='card__photo' src={editUrlForImg(props.picture)} alt='Кадр из фильма' />
+        </a>
       <div className='card__info'>
-        <a className='card__title' href={props.link} alt='Ссылка на фильм' target='_blank' rel="noreferrer">
+        <a className='card__title' href={props.link} alt='Ссылка на фильм' target='_blank' rel='noreferrer'>
           {props.nameRU}
         </a>
         <p className='card__time-duration'>

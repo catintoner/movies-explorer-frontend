@@ -42,15 +42,16 @@ function App() {
       ])
 
         .then(([userInfo, movies]) => {
-          setCurrentUser(JSON.parse(localStorage.getItem('userInfo')));
           setSavedMovies(movies);
           localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          setCurrentUser(JSON.parse(localStorage.getItem('userInfo')));
         })
 
         .catch((err) => {
           console.log(err);
         })
     }
+
   }, [loggedIn]);
 
   function handleReturnBack() {
@@ -72,7 +73,10 @@ function App() {
         })
     } else {
       setLoggedIn(false);
+      localStorage.clear();
     }
+
+
   }
 
   return (
@@ -126,6 +130,7 @@ function App() {
 
             <Route exact path='/sign-up'>
               <Register
+                setLoggedIn={setLoggedIn}
               />
             </Route>
             <Route exact path='/sign-in'>
@@ -133,7 +138,8 @@ function App() {
                 setLoggedIn={setLoggedIn}
               />
             </Route>
-            <Route path='*'>
+
+            <Route exact path='*'>
               <PageNotFound
                 handleReturnBack={handleReturnBack}
               />

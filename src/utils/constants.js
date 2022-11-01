@@ -19,4 +19,15 @@ const LOADINFO = {
   }
 };
 
-export {BASE_URL, moviesUrl, LOADINFO};
+const SHORTTIME = 40;
+const MAXWIDTH = 1280;
+const AVERAGEWIDTH = 768;
+
+export {
+  BASE_URL,
+  moviesUrl,
+  LOADINFO,
+  SHORTTIME,
+  MAXWIDTH,
+  AVERAGEWIDTH,
+};

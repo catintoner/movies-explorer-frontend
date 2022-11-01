@@ -8,8 +8,17 @@
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
-.card__photo {
+.card__link {
   margin: 0 0 16px;
+  text-decoration: none;
+  transition: .5s;
+}
+
+.card__link:hover {
+  opacity: .8;
+}
+
+.card__photo {
   width: 364px;
   height: 203px;
   object-fit: cover;
@@ -93,10 +102,13 @@
 }
 
 @media screen and (max-width: 567px) {
+  .card__link {
+    margin-bottom: 15px;
+  }
+
   .card__photo {
     width: 300px;
     height: 168px;
-    margin-bottom: 15px;
   }
 
   .card__info {

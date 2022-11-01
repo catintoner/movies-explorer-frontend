@@ -31,6 +31,7 @@ function Profile(props) {
 
   function handleUpdateUserInfo(userInfo) {
     if (userInfo.name !== currentUser.name || userInfo.email !== currentUser.email) {
+      setErrors({});
       mainApi.updateUserInfo({
         name: userInfo.name,
         email: userInfo.email,
@@ -69,6 +70,10 @@ function Profile(props) {
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: target.validationMessage });
     setIsValid(target.closest('.profile__form').checkValidity());
+    if (target.value === currentUser[name]) {
+      setErrors({...errors, [name]: 'Введенные данные совпадают с текущими'});
+      setIsValid(false);
+    }
   }
 
   function onSubmit(evt) {
@@ -136,6 +141,7 @@ function Profile(props) {
               onChange={handleInputChange}
               required
               type='email'
+              pattern='^((([0-9A-Za-z]{1}[-0-9A-z\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$'
             >
             </input>
             <span

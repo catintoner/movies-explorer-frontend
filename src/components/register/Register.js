@@ -17,7 +17,16 @@ function Register(props) {
   function handleRegistrationSubmit(email, password, name) {
     auth.createUser(email, password, name)
       .then(() => {
-        history.push('/sign-in');
+        auth.loginUser(email, password)
+        .then((userId) => {
+          localStorage.setItem('userId', userId);
+          props.setLoggedIn(true);
+          history.push('/movies');
+        })
+
+        .catch((message) => {
+          setErrorMessage(message);
+        })
       })
 
       .catch((message) => {

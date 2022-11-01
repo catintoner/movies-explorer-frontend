@@ -15,7 +15,7 @@ import Footer from '../footer/Footer';
 import { moviesApi } from '../../utils/MoviesApi';
 import { mainApi } from '../../utils/MainApi';
 
-import { LOADINFO } from '../../utils/constants';
+import { AVERAGEWIDTH, LOADINFO, MAXWIDTH, SHORTTIME } from '../../utils/constants';
 
 
 
@@ -60,13 +60,13 @@ function Movies(props) {
   }
 
   function filteringMovies(keyWord, pushNew) {
-    const shortTime = 40;
 
-    const filtredMovies = JSON.parse(localStorage.getItem('movies')).filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase())) && (JSON.parse(localStorage.getItem('short')) ? film.duration <= shortTime : true));
+    const filtredMovies = JSON.parse(localStorage.getItem('movies')).filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase())) && (JSON.parse(localStorage.getItem('short')) ? film.duration <= SHORTTIME : true));
 
     localStorage.setItem('keyWord', keyWord);
     setKeyWord('');
     reloadFilms(filtredMovies, pushNew);
+    localStorage.setItem('lastMovies', JSON.stringify(filtredMovies));
   }
 
   function searchMovies(pushNew) {
@@ -101,9 +101,9 @@ function Movies(props) {
 
   function getLoadInfo() {
     const { innerWidth } = window;
-    if (innerWidth >= 1280) {
+    if (innerWidth >= MAXWIDTH) {
       setLoadInfo(LOADINFO.max);
-    } else if (innerWidth >= 768) {
+    } else if (innerWidth >= AVERAGEWIDTH) {
       setLoadInfo(LOADINFO.average);
     } else {
       setLoadInfo(LOADINFO.min);
