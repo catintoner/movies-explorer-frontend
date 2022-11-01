@@ -114,6 +114,7 @@ function App() {
               setSavedMovies={setSavedMovies}
               component={SavedMovies}
               loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               likeBtnClassName='card__btn-like_status_delete'
             >
             </ProtectedRoute>
