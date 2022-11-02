@@ -14,13 +14,6 @@ import './Main.css';
 
 function Main(props) {
 
-  //временное решение
-  React.useEffect(
-    () => {
-      props.setLoggedIn(false);
-    }
-  )
-
   function handleScroll() {
     scroll.scrollTo(650);
   }

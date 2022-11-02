@@ -5,6 +5,30 @@ import { Link } from 'react-router-dom';
 import './SignForm.css';
 
 function SignForm(props) {
+
+  const [values, setValues] = React.useState({});
+  const [errors, setErrors] = React.useState({});
+  const [isValid, setIsValid] = React.useState(false);
+
+  function handleInputChange(evt) {
+    const target = evt.target;
+    const name = target.name;
+    const value = target.value;
+    setValues({ ...values, [name]: value });
+    setErrors({ ...errors, [name]: target.validationMessage });
+    setIsValid(target.closest('.sign-form__container').checkValidity());
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    if (props.name) {
+      props.onSubmit(values.email, values.password, props.name);
+    } else {
+      props.onSubmit(values.email, values.password);
+    }
+  }
+
   return (
     <section className='sign__container'>
       <header className='sign__header'>
@@ -17,7 +41,9 @@ function SignForm(props) {
         </h1>
       </header>
       <main className='sign__main'>
-        <form className='sign-form__container'>
+        <form className='sign-form__container'
+          onSubmit={handleSubmit}
+        >
           {props.children}
           <label
             htmlFor='sign-email'
@@ -29,11 +55,17 @@ function SignForm(props) {
             className='sign-form__input'
             type='email'
             id='sign-email'
+            name='email'
             autoComplete='off'
+            onChange={handleInputChange}
+            pattern='^((([0-9A-Za-z]{1}[-0-9A-z\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$'
+            required
+            placeholder='example@email.com'
+            disabled={props.isPending}
           >
           </input>
-          <span className='sign-form__error sign-form__error_type_hidden'>
-            Что-то пошло не так...
+          <span className={`sign-form__error ${!errors.email && 'sign-form__error_type_hidden'}`}>
+            {errors.email}
           </span>
           <label
             htmlFor='sign-password'
@@ -45,16 +77,24 @@ function SignForm(props) {
             className='sign-form__input'
             type='password'
             id='sign-password'
+            name='password'
             autoComplete='off'
+            onChange={handleInputChange}
+            required
+            disabled={props.isPending}
           >
           </input>
-          <span className={`sign-form__error ${props.lastInputErrorClass}`}>
-            Что-то пошло не так...
+          <span className={`sign-form__error ${props.lastInputErrorClass} ${!errors.password && 'sign-form__error_type_hidden'}`}>
+            {errors.password}
           </span>
+          <p className='sign-form__error sign-form__error_type_server'>
+            {props.errorMessage}
+          </p>
           <input
-            className='sign-form__submit'
+            className={`sign-form__submit ${((!isValid && !props.validName) || props.isPending) ? 'sign-form__submit_type_disabled' : ''}`}
             type='submit'
             value={props.submitName}
+            disabled={((!isValid && !props.validName) || props.isPending) && true}
           >
           </input>
         </form>

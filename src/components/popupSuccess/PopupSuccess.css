@@ -1,0 +1,110 @@
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr minmax(350px, 430px) 1fr;
+  grid-template-rows: repeat(2, min-content);
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .3s, opacity .3s;
+  z-index: 10;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.popup::before {
+  display: block;
+  content: '';
+  position: fixed;
+  background-color: rgba(0, 0, 0, .5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.popup__exit {
+  justify-self: flex-start;
+  grid-area: 1/3/1/4;
+  width: 32px;
+  height: 32px;
+  z-index: 2;
+  transition: .2s;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background-image: url('../../images/burger__close.svg');
+}
+
+.popup__exit:hover {
+  opacity: .7;
+}
+
+.popup__container {
+  max-width: 460px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-area: 2/2/2/3;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+.popup__registration-img {
+  width: 200px;
+  height: 200px;
+  padding: 60px 0 0;
+}
+
+.popup__title {
+  width: calc(100% - 36px*2);
+  margin: 0 auto 54px;
+  padding: 34px 0 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 29.05px;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+
+  .popup {
+    grid-template-columns: 24px minmax(282px, 460px) 24px;
+  }
+
+  .popup__exit {
+    width: 19px;
+    height: 19px;
+    margin: 0 0 16px;
+    grid-area: 1/2/1/3;
+    justify-self: flex-end;
+    background-size: 19px 19px;
+  }
+
+  .popup__container {
+    max-width: 100%;
+  }
+
+  .popup__title {
+    padding-top: 25px;
+    width: calc(100% - 22px*2);
+    margin: 0 auto 75px;
+    grid-area: auto;
+    font-size: 18px;
+    line-height: 21.78px;
+  }
+}

@@ -10,6 +10,13 @@
   grid-row-gap: 37px;
 }
 
+.cardList__infoMessage {
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+  grid-area: 1/1/1/4;
+}
+
 @media screen and (max-width: 1150px) {
   .cardList__container {
     max-width: calc(100% - 30px*2);

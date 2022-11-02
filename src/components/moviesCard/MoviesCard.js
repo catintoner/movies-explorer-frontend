@@ -2,34 +2,54 @@ import React from 'react';
 
 import './MoviesCard.css';
 
-import cardDevelop from '../../images/card__develop.jpg';
-
 function MoviesCard(props) {
 
   const [btnLikeStatus, setBtnLikeStatus] = React.useState(false);
 
-  function handleLikeClick() {
-    if (btnLikeStatus) {
-      setBtnLikeStatus(false);
-    } else {
+  React.useEffect(() => {
+    const likedMovie = props.savedMovies.find(movie => movie.movieId === props.movieId)
+    if (likedMovie) {
       setBtnLikeStatus(true);
     }
+  }, [props.savedMovies]);
 
+  function handleLike() {
+
+    if (!btnLikeStatus) {
+      props.handleLikeClick(props);
+      setBtnLikeStatus(true);
+    } else {
+      setBtnLikeStatus(false);
+      props.handleDeleteClick(props);
+    }
+  }
+
+  function editUrlForImg(picture) {
+    const startUrl = 'https://api.nomoreparties.co/';
+    if (picture.includes(startUrl)) {
+      return picture;
+    } else {
+      return (
+        picture = startUrl + picture
+      );
+    }
   }
 
   return (
     <article className='card'>
-      <img className='card__photo' src={cardDevelop} alt='Кадр из фильма' />
+      <a className='card__link'  href={props.link} alt='Ссылка на фильм' target='_blank' rel='noreferrer'>
+        <img className='card__photo' src={editUrlForImg(props.picture)} alt='Кадр из фильма' />
+        </a>
       <div className='card__info'>
-        <h4 className='card__title'>
-          Something name..
-        </h4>
+        <a className='card__title' href={props.link} alt='Ссылка на фильм' target='_blank' rel='noreferrer'>
+          {props.nameRU}
+        </a>
         <p className='card__time-duration'>
-          16h 16min
+          {`${Math.floor(props.duration / 60)}ч ${props.duration % 60}мин`}
         </p>
-        <button className={`card__btn-like ${btnLikeStatus ? '' : props.likeBtnClassName}`}
+        <button className={`card__btn-like ${btnLikeStatus ? props.likeBtnClassName : ''}`}
           type='button'
-          onClick={handleLikeClick}
+          onClick={handleLike}
         >
         </button>
       </div>

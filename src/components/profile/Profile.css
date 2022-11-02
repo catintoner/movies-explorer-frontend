@@ -119,6 +119,14 @@
   opacity: .8;
 }
 
+.form__submit_type_disabled {
+  background-color: #bdbdbd;
+}
+
+.form__submit_type_disabled:hover {
+  opacity: 1;
+}
+
 .profile__exit-btn {
   text-decoration: none;
   margin: 0 auto;
@@ -149,5 +157,11 @@
 
   .form__field:last-of-type {
     margin-bottom: 195px;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .form__field {
+    max-width: 300px;
   }
 }

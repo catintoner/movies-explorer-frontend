@@ -4,34 +4,36 @@ import './MoviesCardList.css';
 
 import MoviesCard from '../moviesCard/MoviesCard';
 
-function MoviesCardList(props) {
-  const [films, setFilms] = React.useState([]);
-
-  function addValues(counter) {
-    const movies = [];
-    for (let count = 0; count < counter; count++) {
-      movies.push(1 + (Math.random() * (100 - 1)));
-    }
-    setFilms(movies);
-  }
-
-  React.useEffect(
-    () => {
-      addValues(props.count);
-    }, [props.count]
-  );
+function MoviesCardList({
+  movies,
+  likeBtnClassName,
+  handleLikeClick,
+  handleDeleteClick,
+  savedMovies,
+}) {
 
   return (
     <section className='cardList__container'>
-      {films.map((film) => {
+      {movies.length > 0 ? movies.map((film) => {
         return (
           <MoviesCard
-            key={film}
-            likeBtnClassName={props.likeBtnClassName}
+            film={film}
+            key={film.id ? film.id : film.movieId}
+            _id = {film._id ? film._id : film.id}
+            movieId={film.id ? film.id : film.movieId}
+            likeBtnClassName={likeBtnClassName}
+            handleLikeClick={handleLikeClick}
+            handleDeleteClick={handleDeleteClick}
+            savedMovies={savedMovies}
+            picture={film.image.url ? film.image.url : film.image}
+            link={film.trailerLink}
+            nameRU={film.nameRU}
+            duration={film.duration}
           />
         )
       }
-      )}
+      ) : <p className='cardList__infoMessage'>Ничего не найдено</p>
+      }
     </section>
   );
 }

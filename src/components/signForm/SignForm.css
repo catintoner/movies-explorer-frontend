@@ -82,6 +82,14 @@
   color: #FF4062;
 }
 
+.sign-form__error_type_server {
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .sign-form__error_type_hidden {
   opacity: 0;
 }
@@ -104,6 +112,15 @@
 
 .sign-form__submit:hover {
   opacity: .8;
+}
+
+.sign-form__submit_type_disabled {
+  background-color: #bdbdbd;
+  border: none;
+}
+
+.sign-form__submit_type_disabled:hover {
+  opacity: 1;
 }
 
 .sign__footer {

@@ -7,30 +7,105 @@ import SearchForm from '../searchForm/SearchForm';
 
 import './SavedMovies.css';
 
+import { mainApi } from '../../utils/MainApi';
+
+import { auth } from '../../utils/Auth';
+
 function SavedMovies(props) {
 
-  React.useEffect(
-    () => {
-      props.setLoggedIn(true);
-    }
-  )
+  const [movies, setMovies] = React.useState(props.savedMovies);
+
+  const [isFinding, setIsFinding] = React.useState(false);
+
+  const [keyWord, setKeyWord] = React.useState('');
+
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  function handleKeyWord(evt) {
+    setKeyWord(evt.target.value);
+  }
+
+  function handleClickCheck() {
+    setIsChecked((state) => {
+      return !state;
+    });
+  }
+
+  function filteringMovies(keyWord) {
+    const shortTime = 40;
+    const filtredMovies = props.savedMovies.filter((film) => (film.nameRU.toLowerCase().includes(keyWord.toLowerCase()) && (isChecked ? film.duration <= shortTime : true)));
+    setMovies(filtredMovies);
+  }
+
+  function searchMovies() {
+    setIsFinding(true);
+    filteringMovies(keyWord);
+    setIsFinding(false);
+  }
+
+  function handleSearchMovies(evt) {
+    evt.preventDefault();
+    searchMovies();
+  }
+
+  function handleSearchMoviesWithShorty() {
+    searchMovies();
+  }
+
+  function onDeleteClick(newListFilms) {
+    props.setSavedMovies(newListFilms);
+    setMovies(newListFilms);
+  }
+
+  function handleDeleteClick(film) {
+    const movieId = film._id;
+    mainApi.deleteMovie(movieId)
+      .then(() => {
+        onDeleteClick((state) => {
+          return state.filter(item => item._id !== movieId);
+        })
+      })
+
+      .catch((err) => {
+        if (err === 'Необходима авторизация') {
+          auth.logoutUser()
+            .then(() => {
+              localStorage.clear();
+              props.setLoggedIn(false);
+            })
+        }
+      })
+  }
+
+  React.useEffect(() => {
+    searchMovies();
+  }, [isChecked])
 
   return (
 
     <>
       <header>
         <Header
-        loggedIn={props.loggedIn}
+          loggedIn={props.loggedIn}
         />
       </header>
       <main>
         <SearchForm
+          handleSearchMovies={handleSearchMovies}
+          handleKeyWord={handleKeyWord}
+          searchWithShorty={handleSearchMoviesWithShorty}
+          keyWord={keyWord}
+          isChecked={isChecked}
+          handleClickCheck={handleClickCheck}
         />
         <Preloader
+          isFinding={isFinding}
         />
         <MoviesCardList
-          count={3}
+          movies={movies}
+          savedMovies={props.savedMovies}
           likeBtnClassName={props.likeBtnClassName}
+          handleDeleteClick={handleDeleteClick}
         />
       </main>
       <footer>
